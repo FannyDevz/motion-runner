@@ -12,8 +12,8 @@ export const strings = {
     ready: {
       title: "Siap berlari?",
       body: [
-        "Tekan SPASI untuk mulai",
-        "atau lompat di depan kamera",
+        "Tekan SPASI atau ketuk layar",
+        "untuk mulai, atau lompat di depan kamera",
         "",
         "← →  pindah lajur",
         "↑ lompat     ↓ jongkok",
@@ -23,11 +23,11 @@ export const strings = {
       ].join("\n"),
     },
     paused: { title: "Jeda", body: "Tekan P untuk lanjut" },
-    readyAnnouncement: "Siap. Tekan spasi untuk mulai, atau lompat di depan kamera.",
+    readyAnnouncement: "Siap. Tekan spasi atau ketuk layar untuk mulai, atau lompat di depan kamera.",
     pausedAnnouncement: "Permainan dijeda. Tekan P untuk lanjut.",
     hiddenPaused: "Permainan dijeda karena tab disembunyikan.",
     gameOverTitle: "Game over",
-    restart: "Tekan SPASI untuk main lagi",
+    restart: "Tekan SPASI atau ketuk layar untuk main lagi",
     states: {
       READY: "Siap",
       RUNNING: "Berlari",

@@ -26,6 +26,7 @@ import { applySensitivity } from "../settings/Sensitivity";
 import { applySettings, loadSettings, saveSettings, type KeyValueStore, type PlayerSettings } from "../settings/Settings";
 import { Announcer } from "../ui/Announcer";
 import { Menu, type CategoryOption } from "../ui/Menu";
+import { LAYOUT_RULES, computeLayout } from "./layout";
 import { describeGameOver, describeQuestion, describeResult } from "../ui/narration";
 import { strings } from "../ui/strings";
 
@@ -149,6 +150,7 @@ export class GameApp {
     this.menu = new Menu(requireElement("menu"), categories, this.settings);
     this.buildSession();
 
+    this.applyLayout(); // before Phaser measures its container
     const { view } = this.runnerConfig;
     this.phaser = new Phaser.Game({
       type: Phaser.AUTO,
@@ -161,6 +163,9 @@ export class GameApp {
     });
 
     this.applyAppearance(); // now that the scene exists
+    this.applyLayout();
+    window.addEventListener("resize", () => this.applyLayout());
+    window.addEventListener("orientationchange", () => this.applyLayout());
     this.wireMotion();
     this.wireMenu();
     this.wireWindow();
@@ -357,6 +362,19 @@ export class GameApp {
     document.body.classList.toggle("reduced-motion", this.settings.reducedMotion);
     document.body.dataset.camera = this.settings.cameraSize;
     this.scene.setVisuals({ highContrast: this.settings.highContrast, reducedMotion: this.settings.reducedMotion });
+  }
+
+  /** Pick where the camera tags go for this screen, and tell Phaser the game's room has changed. */
+  private applyLayout(): void {
+    const style = document.documentElement.style;
+    style.setProperty("--side-column", `${LAYOUT_RULES.sideColumnPx}px`);
+    style.setProperty("--stack-bar", `${LAYOUT_RULES.stackBarPx}px`);
+
+    const mode = computeLayout(window.innerWidth, window.innerHeight);
+    if (document.body.dataset.layout === mode) return;
+    document.body.dataset.layout = mode;
+    // The game's container just changed size; let the scale manager measure it again.
+    requestAnimationFrame(() => this.phaser?.scale.refresh());
   }
 
   private applyAudio(): void {

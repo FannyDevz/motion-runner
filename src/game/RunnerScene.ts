@@ -242,6 +242,8 @@ export class RunnerScene extends Phaser.Scene {
     this.keys.up.on("down", () => this.send("JUMP"));
     this.keys.down.on("down", () => this.send("CROUCH"));
     this.keys.action.on("down", () => this.onActionKey());
+    // Touch screens have no space bar: tapping the game starts it (or restarts after game over).
+    this.input.on("pointerdown", () => this.onActionKey());
     this.keys.pause.on("down", () => {
       if (this.game_.state === "PAUSED") this.game_.resume();
       else this.game_.pause();
