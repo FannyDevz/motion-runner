@@ -6,6 +6,21 @@ Game lari edukatif yang dikendalikan gerakan tubuh lewat webcam. Karakter berlar
 rintangan tertentu permainan melambat dan menampilkan soal. Soal dijawab dengan berpindah lajur,
 melompat, atau jongkok. Semuanya berjalan di browser (TypeScript, MediaPipe Pose, Phaser), tanpa Python.
 
+## Pratinjau
+
+<table>
+  <tr>
+    <td align="center" valign="top"><img src="docs/preview/menu.jpg" width="230" alt="Menu utama"><br><sub><b>Menu utama</b><br>kamera, kalibrasi, pengaturan</sub></td>
+    <td align="center" valign="top"><img src="docs/preview/gameplay.jpg" width="230" alt="Berlari menghindari rintangan"><br><sub><b>Berlari</b><br>matras, gawang, dan palang atas</sub></td>
+    <td align="center" valign="top"><img src="docs/preview/question-lane.jpg" width="230" alt="Soal pilihan ganda di papan tulis"><br><sub><b>Soal pilihan ganda</b><br>berdiri di lajur jawabannya</sub></td>
+  </tr>
+  <tr>
+    <td align="center" valign="top"><img src="docs/preview/question-truefalse.jpg" width="230" alt="Soal benar atau salah"><br><sub><b>Benar atau salah</b><br>lompat untuk atas, jongkok untuk bawah</sub></td>
+    <td align="center" valign="top"><img src="docs/preview/feedback.jpg" width="230" alt="Hasil jawaban dengan rincian poin"><br><sub><b>Hasil jawaban</b><br>poin, pengali beruntun, bonus cepat</sub></td>
+    <td align="center" valign="top"><img src="docs/preview/game-over.jpg" width="230" alt="Ringkasan setelah permainan berakhir"><br><sub><b>Ringkasan</b><br>skor dan hasil per kategori</sub></td>
+  </tr>
+</table>
+
 ## Menjalankan
 
 Butuh Node.js. Dari folder proyek:
@@ -49,6 +64,19 @@ terhitung. Kalau gerakanmu berhenti sebelum garis, naikkan sensitivitas atau kal
 
 Saat ada soal, dunia melambat. Soal pilihan ganda dijawab dengan berdiri di lajur jawabannya (A kiri,
 B tengah, C kanan). Soal gerakan dijawab dengan melompat atau jongkok.
+
+## Ponsel dan tablet
+
+Tata letak menyesuaikan ukuran layar (`src/app/layout.ts`), supaya gambar kamera dan meter tidak menutupi game:
+
+| Layar | Tata letak |
+| --- | --- |
+| Desktop, tablet mendatar, ponsel mendatar | Panel kamera di samping kolom game |
+| Tablet tegak | Kolom khusus di kiri untuk panel kamera, game memakai sisanya |
+| Ponsel tegak | Panel kamera menjadi bilah di bawah game, dengan gambar kamera kecil |
+
+Layar sentuh tidak punya tombol Spasi, jadi **ketuk layar** untuk mulai atau main lagi. Bermain dengan kamera depan
+tetap berjalan seperti biasa.
 
 ## Pengaturan
 
@@ -121,3 +149,11 @@ Semua nilai yang bisa disetel (ambang gerakan, kecepatan, waktu slow motion, sko
 - `src/questions`: model soal, pemetaan jawaban, validasi
 - `src/settings`: pengaturan pemain dan kalibrasi
 - `src/audio`, `src/ui`, `src/app`: suara, antarmuka, dan perakit aplikasi
+
+## Lisensi
+
+[MIT](LICENSE) © 2026 Tryas Sukmaning Sakti.
+
+Dibangun dengan pustaka pihak ketiga yang punya lisensinya sendiri: [Phaser](https://phaser.io) (MIT),
+[MediaPipe Tasks Vision](https://developers.google.com/mediapipe) (Apache-2.0), dan huruf Alfa Slab One dan Nunito
+(SIL Open Font License) yang dimuat dari Google Fonts.

@@ -21,5 +21,6 @@
     "vitest": "^4.1.11"
   },
   "author": "Tryas Sukmaning Sakti",
-  "description": "Game lari edukatif yang dikendalikan gerakan tubuh lewat webcam"
+  "description": "Game lari edukatif yang dikendalikan gerakan tubuh lewat webcam",
+  "license": "MIT"
 }
