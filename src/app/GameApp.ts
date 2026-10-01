@@ -11,6 +11,7 @@ import { RunnerScene } from "../game/RunnerScene";
 import { PresenceMonitor } from "../game/PresenceMonitor";
 import { SoundManager, type SoundName } from "../audio/SoundManager";
 import { MotionInput } from "../input/MotionInput";
+import type { Movement } from "../movement/MovementTypes";
 import { createPoseFeatures, extractPoseFeatures } from "../movement/PoseFeatures";
 import { POSE_CONNECTIONS } from "../pose/PoseEstimator";
 import type { QuestionBank, QuestionLoadResult } from "../questions";
@@ -314,6 +315,14 @@ export class GameApp {
     });
 
     requireElement("menu-button").addEventListener("click", () => this.menu.open("main"));
+
+    document.querySelectorAll<HTMLButtonElement>("#touch-controls [data-move]").forEach((button) => {
+      // pointerdown, not click: a runner needs the move the instant the finger lands.
+      button.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        if (!this.menu.isOpen) this.scene.press(button.dataset.move as Movement);
+      });
+    });
   }
 
   private wireWindow(): void {

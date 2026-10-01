@@ -253,11 +253,30 @@ body[data-layout="side"] .meter {
 /* "stack": phones held upright. The tags become a bar under the game. */
 body[data-layout="stack"] {
   --hud-bar: calc(var(--stack-bar, 104px) + env(safe-area-inset-bottom, 0px));
+  --top-bar: calc(48px + env(safe-area-inset-top, 0px));
+}
+
+/* The menu button leaves the bottom bar and gets a bar of its own along the top. */
+body[data-layout="stack"]::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--top-bar);
+  background: var(--c-surround);
+  z-index: 1;
+}
+
+body[data-layout="stack"] #menu-button {
+  position: fixed;
+  top: calc(6px + env(safe-area-inset-top, 0px));
+  left: 12px;
+  z-index: 3;
+  padding: 9px 16px;
 }
 
 body[data-layout="stack"] #game {
   position: fixed;
-  inset: 0 0 var(--hud-bar) 0;
+  inset: var(--top-bar) 0 var(--hud-bar) 0;
   width: auto;
   height: auto;
 }
@@ -1129,4 +1148,86 @@ body.reduced-motion .presence-banner {
   #menu-button {
     transition: none;
   }
+}
+
+/* ---------- touch buttons: arrows, jump and crouch for screens without a keyboard ---------- */
+
+.touch-controls {
+  display: none;
+  position: fixed;
+  z-index: 3;
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  width: min(100vw, 60vh);
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  padding: 0 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+/* Shown on touch devices, and wherever the layout was squeezed (narrow windows) */
+@media (pointer: coarse) {
+  .touch-controls {
+    display: flex;
+  }
+}
+
+body[data-layout="stack"] .touch-controls,
+body[data-layout="side"] .touch-controls {
+  display: flex;
+}
+
+body[data-layout="stack"] .touch-controls {
+  bottom: calc(var(--hud-bar) + 10px);
+  width: 100vw;
+}
+
+body[data-layout="side"] .touch-controls {
+  left: calc(50% + var(--side-column, 232px) / 2);
+  width: min(100vw - var(--side-column, 232px), 60vh);
+}
+
+body.calibrating .touch-controls {
+  display: none;
+}
+
+.touch-pad {
+  display: flex;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.touch-controls button {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  min-width: 62px;
+  height: 62px;
+  padding: 0 10px;
+  border: 2.5px solid var(--c-ink);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--c-paper) 88%, transparent);
+  color: var(--c-ink);
+  box-shadow: 0 4px 0 var(--c-ink);
+  font: 800 1.35rem/1 var(--font-body);
+  touch-action: none;
+  cursor: pointer;
+}
+
+.touch-controls button span {
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.touch-controls button:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--c-ink);
+  background: var(--c-paper);
+}
+
+body.high-contrast .touch-controls button {
+  background: var(--c-paper);
 }

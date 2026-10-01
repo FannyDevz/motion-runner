@@ -51,6 +51,18 @@
       <p id="hint" hidden></p>
     </section>
 
+    <!-- Touch screens have no arrow keys: the same four moves as buttons. -->
+    <div id="touch-controls" class="touch-controls" role="group" aria-label="Tombol kontrol">
+      <div class="touch-pad">
+        <button type="button" data-move="LEFT" aria-label="Pindah ke kiri">◀</button>
+        <button type="button" data-move="RIGHT" aria-label="Pindah ke kanan">▶</button>
+      </div>
+      <div class="touch-pad">
+        <button type="button" data-move="JUMP" aria-label="Lompat">▲<span>Lompat</span></button>
+        <button type="button" data-move="CROUCH" aria-label="Jongkok">▼<span>Jongkok</span></button>
+      </div>
+    </div>
+
     <div id="presence-banner" class="presence-banner" role="alert" hidden></div>
 
     <div id="menu" class="menu" role="dialog" aria-modal="true" aria-labelledby="menu-title" hidden>

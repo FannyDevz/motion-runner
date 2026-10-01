@@ -73,9 +73,10 @@ Tata letak menyesuaikan ukuran layar (`src/app/layout.ts`), supaya gambar kamera
 | --- | --- |
 | Desktop, tablet mendatar, ponsel mendatar | Panel kamera di samping kolom game |
 | Tablet tegak | Kolom khusus di kiri untuk panel kamera, game memakai sisanya |
-| Ponsel tegak | Panel kamera menjadi bilah di bawah game, dengan gambar kamera kecil |
+| Ponsel tegak | Tombol **Menu** di bilah atas, panel kamera menjadi bilah di bawah game, dengan gambar kamera kecil |
 
-Layar sentuh tidak punya tombol Spasi, jadi **ketuk layar** untuk mulai atau main lagi. Bermain dengan kamera depan
+Layar sentuh tidak punya keyboard, jadi di ponsel dan tablet muncul **tombol sentuh** di atas game: ◀ ▶ untuk pindah lajur,
+Lompat, dan Jongkok. **Ketuk layar** (atau tombol apa saja) untuk mulai atau main lagi. Bermain dengan kamera depan
 tetap berjalan seperti biasa.
 
 ## Pengaturan

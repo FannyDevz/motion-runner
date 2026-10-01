@@ -160,6 +160,13 @@ export class RunnerScene extends Phaser.Scene {
     this.game_.handleMovement(movement);
   }
 
+  /** A touch-button press: starts the game from READY / GAME_OVER, otherwise it is a movement. */
+  press(movement: Movement): void {
+    const { state } = this.game_;
+    if (state === "READY" || state === "GAME_OVER") this.game_.start();
+    else this.send(movement);
+  }
+
   // --- setup ------------------------------------------------------------------
 
   create(): void {
