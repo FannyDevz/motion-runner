@@ -1,0 +1,128 @@
+[
+  {
+    "id": "lang-opposite-big",
+    "text": "Lawan kata dari 'besar' adalah…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Kecil",
+        "correct": true
+      },
+      {
+        "text": "Tinggi"
+      },
+      {
+        "text": "Panjang"
+      }
+    ]
+  },
+  {
+    "id": "lang-synonym-pretty",
+    "text": "Persamaan kata (sinonim) dari 'cantik' adalah…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Jelek"
+      },
+      {
+        "text": "Indah",
+        "correct": true
+      },
+      {
+        "text": "Kotor"
+      }
+    ]
+  },
+  {
+    "id": "lang-question-mark",
+    "text": "Kalimat tanya diakhiri dengan tanda…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "titik (.)"
+      },
+      {
+        "text": "koma (,)"
+      },
+      {
+        "text": "tanda tanya (?)",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "lang-standard-word",
+    "text": "Penulisan kata baku yang benar adalah…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "apotik"
+      },
+      {
+        "text": "apotek",
+        "correct": true
+      },
+      {
+        "text": "appotek"
+      }
+    ]
+  },
+  {
+    "id": "lang-root-word",
+    "text": "Kata dasar dari 'membaca' adalah…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "baca",
+        "correct": true
+      },
+      {
+        "text": "membaca"
+      },
+      {
+        "text": "bacaan"
+      }
+    ]
+  },
+  {
+    "id": "lang-prefix",
+    "text": "Kata dasar 'sapu' dengan awalan me- menjadi…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "menyapu",
+        "correct": true
+      },
+      {
+        "text": "mensapu"
+      },
+      {
+        "text": "memsapu"
+      }
+    ]
+  },
+  {
+    "id": "lang-simile",
+    "text": "Majas yang membandingkan dua hal secara langsung dengan kata 'seperti' disebut…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Metafora"
+      },
+      {
+        "text": "Perumpamaan (simile)",
+        "correct": true
+      },
+      {
+        "text": "Hiperbola"
+      }
+    ]
+  }
+]

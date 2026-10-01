@@ -1,0 +1,125 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: #0f1115;
+  color: #e8e8ea;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+h1 {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+}
+
+.hint {
+  margin: 0 0 16px;
+  color: #9a9ca5;
+  font-size: 0.9rem;
+}
+
+kbd {
+  padding: 1px 6px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+#start {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: #2f6df6;
+  color: #fff;
+  cursor: pointer;
+}
+
+#start:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+#message {
+  color: #ffb4a8;
+}
+
+#stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#stage video,
+#stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Landmarks are already mirrored in data; only the raw video needs flipping. */
+#stage.mirrored video {
+  transform: scaleX(-1);
+}
+
+.hidden-video {
+  visibility: hidden;
+}
+
+#debug {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  min-width: 220px;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 6px;
+  font: 13px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.debug-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.debug-value {
+  color: #7fe3ff;
+}
+
+#movement-banner {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.65);
+  font: 700 28px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+#movement-banner.show {
+  opacity: 1;
+}
+
+#movement-banner[data-movement="JUMP"] { color: #7dff9a; }
+#movement-banner[data-movement="CROUCH"] { color: #ffb86b; }
+#movement-banner[data-movement="LEFT"],
+#movement-banner[data-movement="CENTER"],
+#movement-banner[data-movement="RIGHT"] { color: #7fe3ff; }

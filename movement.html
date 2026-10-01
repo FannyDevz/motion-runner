@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motion Runner – Uji Gerakan</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Movement Prototype</h1>
+        <p class="hint">Phase 2 · webcam → pose → movement (LEFT / CENTER / RIGHT / JUMP / CROUCH). Stand still for a moment to calibrate. Press <kbd>D</kbd> to toggle debug, <kbd>V</kbd> to toggle video. Video never leaves your device.</p>
+      </header>
+
+      <button id="start" type="button">Start camera</button>
+      <p id="message" hidden></p>
+
+      <div id="stage" hidden>
+        <video id="webcam" autoplay muted playsinline></video>
+        <canvas id="overlay"></canvas>
+        <aside id="debug"></aside>
+        <div id="movement-banner"></div>
+      </div>
+    </main>
+    <script type="module" src="/src/prototype/main.ts"></script>
+  </body>
+</html>

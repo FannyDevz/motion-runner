@@ -1,0 +1,10 @@
+{
+  "files": [
+    "math.json",
+    "science.json",
+    "geography.json",
+    "language.json",
+    "logic.json",
+    "safety.json"
+  ]
+}

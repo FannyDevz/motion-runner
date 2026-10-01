@@ -1,0 +1,182 @@
+[
+  {
+    "id": "sci-mammal",
+    "text": "Hewan manakah yang termasuk mamalia?",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Ayam"
+      },
+      {
+        "text": "Kucing",
+        "correct": true
+      },
+      {
+        "text": "Ikan"
+      }
+    ]
+  },
+  {
+    "id": "sci-roots",
+    "text": "Bagian tumbuhan mana yang menyerap air dari tanah?",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Akar",
+        "correct": true
+      },
+      {
+        "text": "Daun"
+      },
+      {
+        "text": "Batang"
+      }
+    ]
+  },
+  {
+    "id": "sci-home-planet",
+    "text": "Planet manakah yang kita tinggali?",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Mars"
+      },
+      {
+        "text": "Bumi",
+        "correct": true
+      },
+      {
+        "text": "Venus"
+      }
+    ]
+  },
+  {
+    "id": "sci-freezing",
+    "text": "Air membeku pada suhu berapa (pada tekanan normal)?",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "100°C"
+      },
+      {
+        "text": "0°C",
+        "correct": true
+      },
+      {
+        "text": "50°C"
+      }
+    ]
+  },
+  {
+    "id": "sci-oxygen",
+    "text": "Gas apa yang dibutuhkan manusia untuk bernapas?",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Oksigen",
+        "correct": true
+      },
+      {
+        "text": "Nitrogen"
+      },
+      {
+        "text": "Karbon dioksida"
+      }
+    ]
+  },
+  {
+    "id": "sci-heart",
+    "text": "Organ manakah yang memompa darah ke seluruh tubuh?",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Paru-paru"
+      },
+      {
+        "text": "Jantung",
+        "correct": true
+      },
+      {
+        "text": "Hati"
+      }
+    ]
+  },
+  {
+    "id": "sci-mercury",
+    "text": "Planet manakah yang paling dekat dengan Matahari?",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Merkurius",
+        "correct": true
+      },
+      {
+        "text": "Venus"
+      },
+      {
+        "text": "Mars"
+      }
+    ]
+  },
+  {
+    "id": "sci-photosynthesis",
+    "text": "Proses tumbuhan membuat makanan dengan bantuan cahaya matahari disebut…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Respirasi"
+      },
+      {
+        "text": "Fotosintesis",
+        "correct": true
+      },
+      {
+        "text": "Transpirasi"
+      }
+    ]
+  },
+  {
+    "id": "sci-nucleus",
+    "text": "Bagian sel yang menyimpan materi genetik adalah…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Mitokondria"
+      },
+      {
+        "text": "Inti sel",
+        "correct": true
+      },
+      {
+        "text": "Ribosom"
+      }
+    ]
+  },
+  {
+    "id": "sci-newton",
+    "text": "Satuan gaya dalam sistem SI adalah…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Joule"
+      },
+      {
+        "text": "Newton",
+        "correct": true
+      },
+      {
+        "text": "Watt"
+      }
+    ]
+  }
+]

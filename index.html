@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="author" content="Tryas Sukmaning Sakti" />
+    <title>Motion Runner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Nunito:wght@600;700;800&display=swap"
+    />
+  </head>
+  <body>
+    <div id="game" aria-hidden="true"></div>
+
+    <!-- Screen-reader announcements (questions, results, state). The canvas itself is not readable. -->
+    <p id="live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+
+    <section id="hud" aria-label="Kamera dan menu">
+      <button id="menu-button" type="button" aria-haspopup="dialog" aria-controls="menu">☰ Menu</button>
+      <p id="camera-status" role="status"></p>
+      <div id="preview" hidden>
+        <video id="webcam" autoplay muted playsinline aria-hidden="true"></video>
+        <canvas id="overlay" aria-hidden="true"></canvas>
+        <div id="preview-movement"></div>
+      </div>
+      <div id="meters" class="meters" hidden aria-hidden="true">
+        <div class="meter" data-meter="lane">
+          <span class="meter-label">Posisi</span>
+          <div class="meter-track">
+            <i class="meter-tick" data-tick="left"></i>
+            <i class="meter-tick" data-tick="right"></i>
+            <i class="meter-marker"></i>
+          </div>
+          <span class="meter-value"></span>
+        </div>
+        <div class="meter" data-meter="jump">
+          <span class="meter-label">Lompat</span>
+          <div class="meter-track"><i class="meter-fill"></i><i class="meter-tick" data-tick="limit"></i></div>
+          <span class="meter-value"></span>
+        </div>
+        <div class="meter" data-meter="crouch">
+          <span class="meter-label">Jongkok</span>
+          <div class="meter-track"><i class="meter-fill"></i><i class="meter-tick" data-tick="limit"></i></div>
+          <span class="meter-value"></span>
+        </div>
+      </div>
+      <p id="hint" hidden></p>
+    </section>
+
+    <div id="presence-banner" class="presence-banner" role="alert" hidden></div>
+
+    <div id="menu" class="menu" role="dialog" aria-modal="true" aria-labelledby="menu-title" hidden>
+      <div class="menu-card">
+        <!-- Main -->
+        <section data-screen="main">
+          <h1 id="menu-title">Motion Runner</h1>
+          <p class="lead">Game lari edukatif yang kamu kendalikan dengan gerakan tubuh.</p>
+          <div class="menu-actions">
+            <button id="menu-play" type="button" class="primary" data-autofocus>Mulai main</button>
+            <button id="menu-camera" type="button">Aktifkan kamera</button>
+            <button id="menu-calibrate" type="button" disabled>Kalibrasi gerakan</button>
+            <button type="button" data-goto="settings">Pengaturan</button>
+            <button type="button" data-goto="howto">Cara bermain</button>
+          </div>
+          <p id="menu-status" class="menu-status" role="status"></p>
+          <p class="fineprint">Gambar kamera hanya diproses di perangkatmu dan tidak pernah dikirim ke mana pun. Tanpa kamera, game bisa dimainkan dengan keyboard.</p>
+          <p class="credit">Dibuat oleh <strong>Tryas Sukmaning Sakti</strong></p>
+        </section>
+
+        <!-- Settings -->
+        <section data-screen="settings" hidden aria-labelledby="settings-title">
+          <h2 id="settings-title">Pengaturan</h2>
+          <form id="settings-form" onsubmit="return false">
+            <fieldset>
+              <legend>Kategori soal</legend>
+              <div id="category-list" class="check-list"></div>
+            </fieldset>
+
+            <div class="field">
+              <label for="set-difficulty">Tingkat kesulitan</label>
+              <select id="set-difficulty" name="difficulty">
+                <option value="progressive">Bertahap (naik sendiri)</option>
+                <option value="EASY">Mudah</option>
+                <option value="MEDIUM">Sedang</option>
+                <option value="HARD">Sulit</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="set-speed">Kecepatan lari</label>
+              <select id="set-speed" name="speed">
+                <option value="relaxed">Santai</option>
+                <option value="normal">Normal</option>
+                <option value="fast">Cepat</option>
+              </select>
+            </div>
+
+            <fieldset>
+              <legend>Waktu soal</legend>
+              <div class="field">
+                <label for="set-read">Waktu baca soal <output id="out-readSeconds" for="set-read"></output></label>
+                <input id="set-read" type="range" name="readSeconds" />
+              </div>
+              <div class="field">
+                <label for="set-answer">Batas waktu menjawab <output id="out-answerSeconds" for="set-answer"></output></label>
+                <input id="set-answer" type="range" name="answerSeconds" />
+              </div>
+              <div class="check-list">
+                <label class="check"><input type="checkbox" name="autoLock" /> Kunci jawaban otomatis saat sudah mantap</label>
+              </div>
+              <div class="field">
+                <label for="set-lockin">Kunci setelah diam <output id="out-lockInSeconds" for="set-lockin"></output></label>
+                <input id="set-lockin" type="range" name="lockInSeconds" />
+              </div>
+              <p class="fineprint">Kalau kunci otomatis mati, jawabanmu baru dinilai saat batas waktu habis.</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Gerakan</legend>
+              <div class="field">
+                <label for="set-sensitivity">Sensitivitas</label>
+                <select id="set-sensitivity" name="sensitivity">
+                  <option value="low">Rendah (butuh gerakan besar)</option>
+                  <option value="normal">Normal</option>
+                  <option value="high">Tinggi (gerakan kecil sudah terdeteksi)</option>
+                </select>
+              </div>
+              <p class="fineprint">Naikkan kalau gerakanmu sering tidak terdeteksi. Coba juga "Kalibrasi gerakan" di menu utama.</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Suara</legend>
+              <div class="check-list">
+                <label class="check"><input type="checkbox" name="sound" /> Suara aktif</label>
+              </div>
+              <div class="field">
+                <label for="set-volume">Volume</label>
+                <input id="set-volume" type="range" name="volume" min="0" max="1" step="0.05" />
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Tampilan</legend>
+              <div class="field">
+                <label for="set-camera-size">Ukuran gambar kamera</label>
+                <select id="set-camera-size" name="cameraSize">
+                  <option value="small">Kecil</option>
+                  <option value="medium">Sedang</option>
+                  <option value="large">Besar</option>
+                </select>
+              </div>
+              <div class="check-list">
+                <label class="check"><input type="checkbox" name="highContrast" /> Kontras tinggi</label>
+                <label class="check"><input type="checkbox" name="reducedMotion" /> Kurangi animasi</label>
+                <label class="check"><input type="checkbox" name="showCameraPreview" /> Tampilkan pratinjau kamera</label>
+              </div>
+            </fieldset>
+          </form>
+          <p class="fineprint">Kategori, kesulitan, kecepatan, dan waktu soal berlaku mulai permainan berikutnya. Sensitivitas dan tampilan berlaku langsung.</p>
+          <div class="menu-actions">
+            <button type="button" class="primary" data-goto="main">Kembali</button>
+          </div>
+        </section>
+
+        <!-- How to play -->
+        <section data-screen="howto" hidden aria-labelledby="howto-title">
+          <h2 id="howto-title">Cara bermain</h2>
+
+          <div class="howto-pages" aria-live="polite">
+            <!-- 1 -->
+            <article data-howto-page aria-label="Rintangan">
+              <h3>Berlari dan hindari rintangan</h3>
+              <p>Karaktermu berlari sendiri. Kamu hanya perlu menghindari tiga jenis rintangan ini:</p>
+              <div class="howto-figures three">
+                <figure>
+                  <svg viewBox="0 0 120 84" role="img" aria-label="Matras senam biru">
+                    <ellipse class="svg-shadow" cx="60" cy="74" rx="46" ry="6" />
+                    <rect class="svg-mat-top" x="16" y="14" width="88" height="14" rx="5" />
+                    <rect class="svg-mat" x="10" y="24" width="100" height="48" rx="6" />
+                    <rect class="svg-mat-dark" x="10" y="64" width="100" height="8" rx="3" />
+                    <rect class="svg-paper" x="48" y="32" width="24" height="7" rx="3.5" />
+                    <path class="svg-stitch" d="M18 52h84" />
+                  </svg>
+                  <figcaption><strong>Matras biru</strong>Pindah lajur</figcaption>
+                </figure>
+                <figure>
+                  <svg viewBox="0 0 120 84" role="img" aria-label="Gawang lari merah dan putih">
+                    <ellipse class="svg-shadow" cx="60" cy="74" rx="46" ry="6" />
+                    <rect class="svg-ink" x="14" y="68" width="22" height="6" rx="2" />
+                    <rect class="svg-ink" x="84" y="68" width="22" height="6" rx="2" />
+                    <rect class="svg-paper" x="22" y="30" width="6" height="40" />
+                    <rect class="svg-paper" x="92" y="30" width="6" height="40" />
+                    <rect class="svg-bad" x="16" y="28" width="22" height="16" />
+                    <rect class="svg-paper" x="38" y="28" width="22" height="16" />
+                    <rect class="svg-bad" x="60" y="28" width="22" height="16" />
+                    <rect class="svg-paper" x="82" y="28" width="22" height="16" />
+                    <rect class="svg-outline" x="16" y="28" width="88" height="16" />
+                  </svg>
+                  <figcaption><strong>Gawang merah-putih</strong>Lompat <kbd>↑</kbd></figcaption>
+                </figure>
+                <figure>
+                  <svg viewBox="0 0 120 84" role="img" aria-label="Palang kuning-hitam di atas lintasan">
+                    <ellipse class="svg-shadow" cx="60" cy="74" rx="46" ry="6" />
+                    <rect class="svg-wood" x="16" y="8" width="7" height="64" />
+                    <rect class="svg-wood" x="97" y="8" width="7" height="64" />
+                    <rect class="svg-ink" x="10" y="68" width="19" height="6" rx="2" />
+                    <rect class="svg-ink" x="91" y="68" width="19" height="6" rx="2" />
+                    <rect class="svg-whistle" x="16" y="8" width="88" height="20" />
+                    <g class="svg-ink">
+                      <rect x="26" y="8" width="9" height="20" /><rect x="44" y="8" width="9" height="20" />
+                      <rect x="62" y="8" width="9" height="20" /><rect x="80" y="8" width="9" height="20" />
+                    </g>
+                    <rect class="svg-outline" x="16" y="8" width="88" height="20" />
+                  </svg>
+                  <figcaption><strong>Palang kuning-hitam</strong>Jongkok <kbd>↓</kbd></figcaption>
+                </figure>
+              </div>
+              <p>Untuk pindah lajur, geser badanmu ke kiri atau kanan di depan kamera, atau tekan <kbd>←</kbd> <kbd>→</kbd>.</p>
+            </article>
+
+            <!-- 2 -->
+            <article data-howto-page aria-label="Soal" hidden>
+              <h3>Menjawab soal</h3>
+              <p>Setiap beberapa rintangan, permainan melambat dan soal muncul di papan tulis. Cara menjawabnya tergantung jenis soal:</p>
+              <div class="howto-figures two">
+                <figure>
+                  <svg viewBox="0 0 160 84" role="img" aria-label="Tiga matras jawaban A, B, dan C berjajar di tiga lajur">
+                    <path class="svg-line" d="M54 4v76M106 4v76" />
+                    <rect class="svg-ans-a" x="6" y="22" width="44" height="34" rx="6" />
+                    <rect class="svg-ans-b" x="58" y="22" width="44" height="34" rx="6" />
+                    <rect class="svg-ans-c" x="110" y="22" width="44" height="34" rx="6" />
+                    <text x="28" y="46" text-anchor="middle">A</text>
+                    <text x="80" y="46" text-anchor="middle">B</text>
+                    <text x="132" y="46" text-anchor="middle">C</text>
+                    <path class="svg-arrow" d="M80 76v-12m-6 6 6-6 6 6" />
+                  </svg>
+                  <figcaption><strong>Pilihan ganda</strong>Berdiri di lajur jawabannya: A kiri, B tengah, C kanan</figcaption>
+                </figure>
+                <figure>
+                  <svg viewBox="0 0 160 84" role="img" aria-label="Dua jawaban bertumpuk: A Benar di atas, B Salah di bawah">
+                    <rect class="svg-ans-a" x="14" y="6" width="132" height="32" rx="6" />
+                    <rect class="svg-ans-b" x="14" y="46" width="132" height="32" rx="6" />
+                    <text x="80" y="28" text-anchor="middle">A ▲ Benar</text>
+                    <text x="80" y="68" text-anchor="middle">B ▼ Salah</text>
+                  </svg>
+                  <figcaption><strong>Benar atau salah</strong>Lompat <kbd>↑</kbd> untuk yang di atas, jongkok <kbd>↓</kbd> untuk yang di bawah</figcaption>
+                </figure>
+              </div>
+              <p>Jawabanmu dinilai saat waktu menjawab habis, atau lebih cepat kalau kamu sudah diam di jawabanmu. Waktunya bisa diatur di Pengaturan.</p>
+            </article>
+
+            <!-- 3 -->
+            <article data-howto-page aria-label="Kamera" hidden>
+              <h3>Bermain dengan kamera</h3>
+              <ol class="howto-steps">
+                <li><span>Di menu, pilih <strong>Aktifkan kamera</strong> dan izinkan.</span></li>
+                <li><span>Berdirilah 2 sampai 3 langkah dari kamera sampai <strong>seluruh badan terlihat</strong>, di tempat yang cukup terang.</span></li>
+                <li><span>Pilih <strong>Kalibrasi gerakan</strong> dan ikuti petunjuknya: berdiri, geser kiri, geser kanan, lompat, jongkok.</span></li>
+                <li><span><strong>Lompat</strong> di depan kamera untuk memulai permainan.</span></li>
+              </ol>
+              <figure class="howto-camera">
+                <svg viewBox="0 0 200 110" role="img" aria-label="Seluruh badan berada di dalam bingkai kamera">
+                  <rect class="svg-frame" x="50" y="4" width="100" height="102" rx="8" />
+                  <circle class="svg-runner" cx="100" cy="26" r="9" />
+                  <rect class="svg-runner" x="88" y="38" width="24" height="30" rx="8" />
+                  <path class="svg-runner-limb" d="M93 68 90 98M107 68 110 98M88 44 78 64M112 44 122 64" />
+                  <path class="svg-arrow" d="M30 12v86m-5-80 5-6 5 6m-10 68 5 6 5-6" />
+                </svg>
+                <figcaption>Kepala sampai kaki harus masuk bingkai.</figcaption>
+              </figure>
+              <p class="howto-tip">Di bawah gambar kamera ada <strong>meter</strong>. Garis hitam di tiap meter adalah batas yang harus dilewati supaya gerakanmu terhitung. Kalau gerakan sering terlewat, naikkan <strong>Sensitivitas</strong> di Pengaturan.</p>
+            </article>
+
+            <!-- 4 -->
+            <article data-howto-page aria-label="Poin" hidden>
+              <h3>Poin dan permainan berakhir</h3>
+              <ul class="howto-list">
+                <li><strong>Jawaban benar</strong> memberi poin. Soal yang lebih sulit bernilai lebih banyak.</li>
+                <li><strong>Beruntun:</strong> tiap jawaban benar berturut-turut menaikkan pengali poin.</li>
+                <li><strong>Cepat:</strong> yang sudah mantap menjawab lebih awal mendapat bonus.</li>
+                <li><strong>Salah atau tidak menjawab</strong> mengurangi poin dan memutus rangkaian beruntun.</li>
+                <li><strong>Menabrak rintangan</strong> mengakhiri permainan. Soal yang tidak terjawab tidak membuatmu tertabrak.</li>
+              </ul>
+              <p>Kecepatan lari naik pelan-pelan, dan soalnya makin sulit kalau jawabanmu banyak yang benar.</p>
+            </article>
+
+            <!-- 5 -->
+            <article data-howto-page aria-label="Tombol" hidden>
+              <h3>Tombol keyboard</h3>
+              <p>Tanpa kamera, semua gerakan bisa dilakukan dengan keyboard.</p>
+              <dl class="howto-keys">
+                <div><dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>Pindah lajur</dd></div>
+                <div><dt><kbd>↑</kbd></dt><dd>Lompat</dd></div>
+                <div><dt><kbd>↓</kbd></dt><dd>Jongkok</dd></div>
+                <div><dt><kbd>Spasi</kbd></dt><dd>Mulai, atau main lagi</dd></div>
+                <div><dt><kbd>P</kbd></dt><dd>Jeda</dd></div>
+                <div><dt><kbd>Esc</kbd> atau <kbd>M</kbd></dt><dd>Buka menu</dd></div>
+              </dl>
+            </article>
+          </div>
+
+          <div class="howto-nav">
+            <button type="button" id="howto-prev">Sebelumnya</button>
+            <span id="howto-dots" class="howto-dots" aria-hidden="true"></span>
+            <button type="button" id="howto-next" class="primary">Berikutnya</button>
+          </div>
+          <p id="howto-count" class="sr-only" aria-live="polite"></p>
+        </section>
+
+        <!-- Calibration -->
+        <section data-screen="calibrate" hidden aria-labelledby="calibrate-title">
+          <h2 id="calibrate-title">Kalibrasi gerakan</h2>
+          <p id="calib-instruction" class="calib-instruction" role="status" aria-live="assertive"></p>
+          <div class="calib-progress" aria-hidden="true"><div id="calib-bar"></div></div>
+          <ol id="calib-steps" class="calib-steps"></ol>
+          <div class="menu-actions">
+            <button id="calib-skip" type="button">Lewati langkah ini</button>
+            <button id="calib-cancel" type="button">Batal</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="/src/app/main.ts"></script>
+  </body>
+</html>

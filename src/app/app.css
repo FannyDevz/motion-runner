@@ -1,0 +1,1011 @@
+/*
+ * Motion Runner: a school sports day.
+ * A red tartan running track, a mown infield, a chalkboard for the questions, a race bib for the
+ * score, and a printed programme for the menu.
+ *
+ * These --c-* tokens are the single source of colour. The game canvas reads them at start-up
+ * (src/ui/theme.ts), so changing one here recolours the menu and the track together.
+ */
+
+:root {
+  color-scheme: light;
+
+  --c-ink: #1d2a24;
+  --c-paper: #f6efe0;
+  --c-paper-2: #e9dfc7;
+
+  --c-track: #c4512f;
+  --c-track-dark: #ab4325;
+  --c-track-line: #fbf6ea;
+  --c-grass: #3f8a43;
+  --c-grass-light: #4b9c4f;
+  --c-sky-top: #8fcbe8;
+  --c-sky-bottom: #eaf4f1;
+  --c-stand: #38405c;
+
+  --c-board: #1f3d34;
+  --c-board-edge: #11271f;
+  --c-frame: #9a6532;
+  --c-frame-dark: #6b4220;
+  --c-chalk: #f4f1e8;
+  --c-chalk-dim: #b9c4b8;
+  --c-chalk-yellow: #f6d55c;
+  --c-chalk-blue: #78bff0;
+  --c-chalk-pink: #f59ac0;
+  --c-chalk-green: #9be09f;
+
+  --c-whistle: #ffc933;
+  --c-good: #2e9e5b;
+  --c-bad: #d62839;
+  --c-mat: #2f6fd0;
+  --c-mat-dark: #1f4fa0;
+  --c-runner: #2457d6;
+
+  --c-surround: #17291f;
+  --c-focus: #1b5fd6;
+
+  --font-display: "Alfa Slab One", Georgia, Rockwell, serif;
+  --font-body: Nunito, "Segoe UI", system-ui, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--c-surround);
+  color: var(--c-ink);
+  font-family: var(--font-body);
+  overflow: hidden;
+}
+
+#game {
+  width: 100%;
+  height: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+/* ---------- camera tags (top left) ---------- */
+
+/* The camera tags sit in the space beside the game column. The width follows the "camera size" setting. */
+body {
+  --camera-w: 440px;
+}
+
+body[data-camera="small"] {
+  --camera-w: 220px;
+}
+
+body[data-camera="medium"] {
+  --camera-w: 320px;
+}
+
+#hud {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* The game column is 60% as wide as the screen is tall; use the space on either side of it, but never less than 190px. */
+  width: clamp(190px, min(var(--camera-w), calc((100vw - min(100vw, 60vh)) / 2 - 24px)), var(--camera-w));
+}
+
+#menu-button {
+  align-self: flex-start;
+  padding: 7px 14px;
+  border: 2.5px solid var(--c-ink);
+  border-radius: 999px;
+  background: var(--c-paper);
+  color: var(--c-ink);
+  box-shadow: 0 3px 0 var(--c-ink);
+  font: 800 0.9rem/1.2 var(--font-body);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+
+#menu-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--c-ink);
+}
+
+#menu-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--c-ink);
+}
+
+#camera-status,
+#hint {
+  margin: 0;
+  padding: 7px 10px 7px 30px;
+  position: relative;
+  border: 2px solid var(--c-ink);
+  border-radius: 10px;
+  background: var(--c-paper);
+  font: 700 0.78rem/1.4 var(--font-body);
+}
+
+#hint {
+  padding-left: 10px;
+  background: var(--c-paper-2);
+  font-weight: 600;
+}
+
+/* A small coloured dot says how the camera is doing; the words say it too. */
+#camera-status::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--c-ink);
+  background: var(--c-paper-2);
+}
+
+#camera-status[data-level="ok"]::before {
+  background: var(--c-good);
+}
+
+#camera-status[data-level="warn"]::before {
+  background: var(--c-whistle);
+}
+
+#camera-status[data-level="error"]::before {
+  background: var(--c-bad);
+}
+
+#preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 3px solid var(--c-paper);
+  border-radius: 12px;
+  background: #000;
+  box-shadow: 0 3px 0 var(--c-ink), 0 0 0 2px var(--c-ink);
+  overflow: hidden;
+}
+
+#preview video,
+#preview canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Landmarks are already mirrored in the data; only the raw video needs flipping. */
+#preview.mirrored video {
+  transform: scaleX(-1);
+}
+
+#preview-movement {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: var(--c-whistle);
+  color: var(--c-ink);
+  font: 400 0.85rem/1.2 var(--font-display);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+#preview-movement.show {
+  opacity: 1;
+}
+
+/* ---------- live movement meters ---------- */
+
+.meters {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 10px;
+  border: 2px solid var(--c-ink);
+  border-radius: 10px;
+  background: var(--c-paper);
+}
+
+/* An author "display" would otherwise beat the hidden attribute. */
+.meters[hidden] {
+  display: none;
+}
+
+.meter {
+  display: grid;
+  grid-template-columns: 58px 1fr 74px;
+  align-items: center;
+  gap: 8px;
+  font: 800 0.72rem/1.2 var(--font-body);
+}
+
+.meter-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.meter-track {
+  position: relative;
+  height: 12px;
+  border: 2px solid var(--c-ink);
+  border-radius: 999px;
+  background: var(--c-paper-2);
+  overflow: hidden;
+}
+
+.meter-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: var(--c-chalk-blue);
+}
+
+.meter.hit .meter-fill {
+  background: var(--c-good);
+}
+
+/* The line a movement has to reach to count. */
+.meter-tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  margin-left: -1.5px;
+  background: var(--c-ink);
+}
+
+.meter-marker {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  width: 8px;
+  margin-left: -4px;
+  border-radius: 4px;
+  background: var(--c-track);
+  box-shadow: 0 0 0 2px var(--c-paper);
+}
+
+.meter.hit .meter-marker {
+  background: var(--c-good);
+}
+
+/* ---------- calibration: camera above, steps below ---------- */
+
+body.calibrating {
+  /* The picture is as wide as the screen's height allows while leaving about 330px for the steps underneath. */
+  --calib-w: clamp(220px, min(440px, (100vh - 440px) * 4 / 3), calc(100vw - 24px));
+}
+
+body.calibrating #menu-button,
+body.calibrating #camera-status,
+body.calibrating #hint {
+  display: none;
+}
+
+body.calibrating #hud {
+  z-index: 25;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  width: var(--calib-w);
+}
+
+body.calibrating .menu {
+  align-items: flex-end;
+  padding-bottom: 12px;
+  background: rgba(23, 41, 31, 0.45);
+  backdrop-filter: none;
+}
+
+body.calibrating .menu-card {
+  /* What is left under the picture (4:3) and the meters. */
+  max-height: calc(100vh - 110px - var(--calib-w) * 0.75);
+  min-height: 250px;
+}
+
+[data-screen="calibrate"] h2 {
+  margin-bottom: 12px;
+  padding: 12px 20px 10px;
+  font-size: 1.25rem;
+}
+
+[data-screen="calibrate"] {
+  padding-bottom: 16px;
+}
+
+[data-screen="calibrate"] .calib-instruction {
+  min-height: 2.6em;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+[data-screen="calibrate"] .menu-actions {
+  flex-direction: row;
+  margin-block: 12px 0;
+}
+
+[data-screen="calibrate"] .menu-actions button {
+  flex: 1;
+  padding-block: 10px;
+}
+
+/* The steps become a row of numbered chips. */
+[data-screen="calibrate"] .calib-steps {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 4px 14px;
+  margin-block: 10px 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: calib;
+  font-size: 0.85rem;
+}
+
+[data-screen="calibrate"] .calib-steps li {
+  counter-increment: calib;
+  white-space: nowrap;
+}
+
+[data-screen="calibrate"] .calib-steps li::before {
+  content: counter(calib) ". ";
+}
+
+/* ---------- player-lost banner ---------- */
+
+.presence-banner {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 15;
+  width: min(420px, calc(100% - 32px));
+  padding: 18px 22px;
+  transform: translate(-50%, -50%) rotate(-1.5deg);
+  border: 3px solid var(--c-ink);
+  border-radius: 14px;
+  background: var(--c-whistle);
+  box-shadow: 0 5px 0 var(--c-ink);
+  color: var(--c-ink);
+  font: 800 1.1rem/1.4 var(--font-body);
+  text-align: center;
+}
+
+.presence-banner[hidden] {
+  display: none;
+}
+
+/* ---------- menu: the programme ---------- */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(23, 41, 31, 0.72);
+  backdrop-filter: blur(3px);
+  overflow-y: auto;
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+.menu-card {
+  width: min(520px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  border: 3px solid var(--c-ink);
+  border-radius: 18px;
+  background: var(--c-paper);
+  box-shadow: 0 6px 0 var(--c-ink), 0 28px 60px rgba(0, 0, 0, 0.4);
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-ink) var(--c-paper-2);
+}
+
+.menu-card section {
+  padding-bottom: 24px;
+}
+
+.menu-card section > :not(h1):not(h2) {
+  margin-inline: 24px;
+}
+
+/* Section titles are the track-red band at the top of each page, with a painted lane line. */
+.menu-card h1,
+.menu-card h2 {
+  margin: 0 0 18px;
+  padding: 20px 24px 16px;
+  background: var(--c-track);
+  border-bottom: 5px dashed var(--c-track-line);
+  color: var(--c-track-line);
+  font: 400 1.9rem/1.1 var(--font-display);
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+.menu-card h2 {
+  font-size: 1.55rem;
+}
+
+.lead {
+  margin-block: 0 20px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-block: 16px;
+}
+
+.menu-card button {
+  padding: 12px 16px;
+  border: 2.5px solid var(--c-ink);
+  border-radius: 12px;
+  background: var(--c-paper);
+  color: var(--c-ink);
+  box-shadow: 0 3px 0 var(--c-ink);
+  font: 800 1rem/1.2 var(--font-body);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+
+.menu-card button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--c-ink);
+}
+
+.menu-card button:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--c-ink);
+}
+
+.menu-card button.primary {
+  padding-block: 15px;
+  background: var(--c-whistle);
+  font-size: 1.15rem;
+}
+
+.menu-card button:disabled {
+  border-color: rgba(29, 42, 36, 0.45);
+  color: rgba(29, 42, 36, 0.55);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.menu-status {
+  min-height: 1.4em;
+  margin-block: 4px 0;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--c-good);
+}
+
+.menu-status[data-level="warn"] {
+  color: #8a5a00;
+}
+
+.menu-status[data-level="error"] {
+  color: var(--c-bad);
+}
+
+.credit {
+  margin-block: 14px 0;
+  padding-top: 12px;
+  border-top: 2px dashed rgba(29, 42, 36, 0.3);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.fineprint {
+  margin-block: 14px 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+fieldset {
+  min-width: 0;
+  margin-block: 0 16px;
+  padding: 12px 14px 14px;
+  border: 2px solid var(--c-ink);
+  border-radius: 12px;
+}
+
+legend {
+  padding: 0 6px;
+  font: 800 0.78rem/1 var(--font-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-block: 0 16px;
+}
+
+.field label {
+  font-weight: 800;
+}
+
+.field select {
+  padding: 10px 12px;
+  border: 2.5px solid var(--c-ink);
+  border-radius: 10px;
+  background: #fffaf0;
+  color: var(--c-ink);
+  font: 700 1rem var(--font-body);
+}
+
+.field input[type="range"] {
+  accent-color: var(--c-track);
+}
+
+.field input[type="range"]:disabled {
+  opacity: 0.4;
+}
+
+.field label output {
+  float: right;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 28px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.check input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--c-track);
+}
+
+/* ---------- how to play: five illustrated pages ---------- */
+
+.menu-card kbd {
+  display: inline-block;
+  padding: 0 7px;
+  border: 2px solid var(--c-ink);
+  border-bottom-width: 3px;
+  border-radius: 6px;
+  background: var(--c-paper);
+  font: 800 0.85em/1.5 var(--font-body);
+}
+
+.howto-pages h3 {
+  margin: 0 0 8px;
+  font: 400 1.25rem/1.2 var(--font-display);
+  text-wrap: balance;
+}
+
+.howto-pages p {
+  margin-block: 0 12px;
+  line-height: 1.5;
+}
+
+.howto-pages article > :last-child {
+  margin-bottom: 0;
+}
+
+/* The illustrations use the game's own colours. */
+.howto-figures {
+  display: grid;
+  gap: 10px;
+  margin-block: 4px 14px;
+}
+
+.howto-figures.three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.howto-figures.two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.howto-pages figure {
+  margin: 0;
+  text-align: center;
+}
+
+.howto-pages figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--c-ink);
+  border-radius: 10px;
+  background: var(--c-paper-2);
+}
+
+.howto-pages figcaption {
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.howto-pages figcaption strong {
+  display: block;
+  font-weight: 800;
+}
+
+/* Needs the section prefix to beat ".menu-card section > :not(h1):not(h2)", which sets the side margins. */
+.menu-card section .howto-camera {
+  max-width: 230px;
+  margin: 0 auto 12px;
+}
+
+.howto-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  line-height: 1.45;
+}
+
+.howto-steps li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  counter-increment: step;
+}
+
+.howto-steps li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font: 400 0.9rem/1 var(--font-display);
+}
+
+.howto-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding-left: 20px;
+  line-height: 1.45;
+}
+
+.howto-tip {
+  padding: 10px 12px;
+  border: 2px solid var(--c-ink);
+  border-radius: 10px;
+  background: var(--c-paper-2);
+  font-size: 0.9rem;
+}
+
+.howto-keys {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.howto-keys > div {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  align-items: center;
+  gap: 12px;
+  padding-block: 7px;
+  border-bottom: 2px dashed rgba(29, 42, 36, 0.25);
+}
+
+.howto-keys dt,
+.howto-keys dd {
+  margin: 0;
+}
+
+.howto-keys dd {
+  font-weight: 700;
+}
+
+.howto-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-block: 16px 0;
+}
+
+.howto-nav button {
+  flex: 1;
+}
+
+.howto-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.howto-dots i {
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--c-ink);
+  border-radius: 50%;
+}
+
+.howto-dots i[data-active] {
+  background: var(--c-ink);
+}
+
+/* Illustration colours (SVG shapes take their fill from the same tokens as the game). */
+.svg-shadow { fill: var(--c-ink); opacity: 0.22; }
+.svg-ink { fill: var(--c-ink); }
+.svg-paper { fill: var(--c-paper); }
+.svg-bad { fill: var(--c-bad); }
+.svg-whistle { fill: var(--c-whistle); }
+.svg-wood { fill: var(--c-frame-dark); }
+.svg-mat { fill: var(--c-mat); }
+.svg-mat-top { fill: var(--c-chalk-blue); }
+.svg-mat-dark { fill: var(--c-mat-dark); }
+.svg-stitch { fill: none; stroke: var(--c-mat-dark); stroke-width: 1.5; }
+.svg-outline { fill: none; stroke: var(--c-ink); stroke-width: 2; }
+.svg-line { fill: none; stroke: var(--c-ink); stroke-width: 2; stroke-dasharray: 5 5; opacity: 0.5; }
+.svg-ans-a, .svg-ans-b, .svg-ans-c { stroke: var(--c-ink); stroke-width: 2.5; }
+.svg-ans-a { fill: var(--c-chalk-blue); }
+.svg-ans-b { fill: var(--c-chalk-green); }
+.svg-ans-c { fill: var(--c-chalk-yellow); }
+.howto-pages svg text { fill: var(--c-ink); font: 400 15px var(--font-display); }
+.svg-arrow { fill: none; stroke: var(--c-ink); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.svg-frame { fill: var(--c-paper); stroke: var(--c-ink); stroke-width: 3; }
+.svg-runner { fill: var(--c-runner); stroke: var(--c-paper); stroke-width: 2; }
+.svg-runner-limb { fill: none; stroke: var(--c-runner); stroke-width: 7; stroke-linecap: round; }
+
+@media (max-width: 460px) {
+  .howto-figures.two {
+    grid-template-columns: 1fr;
+  }
+
+  .howto-keys > div {
+    grid-template-columns: 7.5rem 1fr;
+  }
+}
+
+/* Calibration */
+.calib-instruction {
+  min-height: 3.2em;
+  margin-block: 0 12px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.calib-progress {
+  height: 16px;
+  border: 2.5px solid var(--c-ink);
+  border-radius: 999px;
+  background: var(--c-paper-2);
+  overflow: hidden;
+}
+
+.calib-progress > div {
+  width: 0;
+  height: 100%;
+  background: var(--c-track);
+  transition: width 0.15s linear;
+}
+
+.calib-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 22px;
+  margin-block: 16px 0;
+  font-weight: 700;
+  color: rgba(29, 42, 36, 0.6);
+}
+
+.calib-steps li[data-state="active"] {
+  color: var(--c-ink);
+  font-weight: 800;
+}
+
+.calib-steps li[data-state="done"] {
+  color: var(--c-good);
+}
+
+.calib-steps li[data-state="skipped"] {
+  text-decoration: line-through;
+}
+
+/* ---------- narrow screens ---------- */
+
+/* The game column is only as wide as the screen, so the camera tags would cover the race bib. Move them to the bottom. */
+@media (max-width: 760px) {
+  #hud {
+    top: auto;
+    bottom: 12px;
+    width: min(var(--camera-w), 52vw);
+  }
+
+  /* On a phone the meters would cover the track; keep only the picture. */
+  .meters {
+    display: none;
+  }
+
+  .menu {
+    align-items: flex-start;
+  }
+
+  .menu-card h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* ---------- high contrast ---------- */
+
+body.high-contrast .menu-card {
+  border-color: #fff;
+  background: #000;
+  color: #fff;
+  box-shadow: none;
+}
+
+body.high-contrast .menu-card h1,
+body.high-contrast .menu-card h2 {
+  background: #000;
+  border-bottom: 5px dashed #fff;
+  color: #fff;
+}
+
+body.high-contrast .menu-card button,
+body.high-contrast #menu-button {
+  border-color: #fff;
+  background: #000;
+  color: #fff;
+  box-shadow: none;
+}
+
+body.high-contrast .menu-card button.primary {
+  background: #ffe600;
+  color: #000;
+}
+
+body.high-contrast .menu-card button:disabled {
+  border-color: #aaa;
+  color: #aaa;
+}
+
+body.high-contrast fieldset,
+body.high-contrast .field select,
+body.high-contrast .calib-progress {
+  border-color: #fff;
+}
+
+body.high-contrast .field select {
+  background: #000;
+  color: #fff;
+}
+
+body.high-contrast .calib-progress {
+  background: #000;
+}
+
+body.high-contrast .calib-progress > div {
+  background: #ffe600;
+}
+
+body.high-contrast .howto-steps li::before {
+  background: #fff;
+  color: #000;
+}
+
+/* The illustrations are drawn for a light page, so give them one. */
+body.high-contrast .howto-pages figure svg {
+  border-color: #fff;
+  background: #f6efe0;
+}
+
+body.high-contrast .howto-tip,
+body.high-contrast .menu-card kbd {
+  border-color: #fff;
+  background: #000;
+  color: #fff;
+}
+
+body.high-contrast .howto-keys > div {
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+
+body.high-contrast .howto-dots i {
+  border-color: #fff;
+}
+
+body.high-contrast .howto-dots i[data-active] {
+  background: #fff;
+}
+
+body.high-contrast .credit {
+  border-top-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+}
+
+body.high-contrast .menu-status,
+body.high-contrast .menu-status[data-level] {
+  color: #fff;
+}
+
+body.high-contrast .calib-steps,
+body.high-contrast .calib-steps li[data-state] {
+  color: #fff;
+}
+
+body.high-contrast #camera-status,
+body.high-contrast #hint {
+  border-color: #fff;
+  background: #000;
+  color: #fff;
+}
+
+body.high-contrast .presence-banner {
+  border-color: #fff;
+  background: #000;
+  color: #ffe600;
+  box-shadow: none;
+}
+
+/* ---------- reduced motion ---------- */
+
+body.reduced-motion *,
+body.reduced-motion *::before,
+body.reduced-motion *::after {
+  transition-duration: 0.001ms !important;
+  animation-duration: 0.001ms !important;
+}
+
+body.reduced-motion .presence-banner {
+  transform: translate(-50%, -50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calib-progress > div,
+  #preview-movement,
+  .menu-card button,
+  #menu-button {
+    transition: none;
+  }
+}

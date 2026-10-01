@@ -1,0 +1,164 @@
+[
+  {
+    "id": "math-7-plus-5",
+    "text": "Berapa hasil 7 + 5?",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "12",
+        "correct": true
+      },
+      {
+        "text": "11"
+      },
+      {
+        "text": "13"
+      }
+    ]
+  },
+  {
+    "id": "math-6-times-4",
+    "text": "Berapa hasil 6 × 4?",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "20"
+      },
+      {
+        "text": "22"
+      },
+      {
+        "text": "24",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "math-15-minus-8",
+    "text": "Berapa hasil 15 − 8?",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "6"
+      },
+      {
+        "text": "7",
+        "correct": true
+      },
+      {
+        "text": "8"
+      }
+    ]
+  },
+  {
+    "id": "math-12-times-3",
+    "text": "Berapa hasil 12 × 3?",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "36",
+        "correct": true
+      },
+      {
+        "text": "32"
+      },
+      {
+        "text": "38"
+      }
+    ]
+  },
+  {
+    "id": "math-144-div-12",
+    "text": "Berapa hasil 144 ÷ 12?",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "11"
+      },
+      {
+        "text": "12",
+        "correct": true
+      },
+      {
+        "text": "14"
+      }
+    ]
+  },
+  {
+    "id": "math-25-percent-80",
+    "text": "Berapa 25% dari 80?",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "15"
+      },
+      {
+        "text": "20",
+        "correct": true
+      },
+      {
+        "text": "25"
+      }
+    ]
+  },
+  {
+    "id": "math-17-times-6",
+    "text": "Berapa hasil 17 × 6?",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "96"
+      },
+      {
+        "text": "102",
+        "correct": true
+      },
+      {
+        "text": "112"
+      }
+    ]
+  },
+  {
+    "id": "math-sqrt-169",
+    "text": "Berapa akar kuadrat dari 169?",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "12"
+      },
+      {
+        "text": "13",
+        "correct": true
+      },
+      {
+        "text": "14"
+      }
+    ]
+  },
+  {
+    "id": "math-solve-x",
+    "text": "Jika 3x + 4 = 19, berapa nilai x?",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "4"
+      },
+      {
+        "text": "5",
+        "correct": true
+      },
+      {
+        "text": "6"
+      }
+    ]
+  }
+]
