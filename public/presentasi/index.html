@@ -49,9 +49,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.viewport { position: fixed; inset: 0; display: grid; place-items: center; overflow: hidden; }
+.viewport { position: fixed; inset: 0; overflow: hidden; }
 .stage {
-  position: relative;
+  position: absolute; left: 50%; top: 50%;
   width: 1920px; height: 1080px;
   flex: none;
   transform-origin: center center;
@@ -362,6 +362,7 @@ aside.notes { display: none; }
   html, body { height: auto; }
   body { overflow: auto; }
   .viewport { position: static; display: block; overflow: visible; padding: 16px 12px calc(24px + env(safe-area-inset-bottom, 0px)); }
+  .stage { position: static; }
   .stage { width: auto; height: auto; transform: none !important; box-shadow: none; overflow: visible; border-radius: 0; display: grid; gap: 16px; }
   .slide { position: relative; inset: auto; opacity: 1; visibility: visible; transform: none; transition: none; padding: 44px 20px 52px; border-radius: 12px; overflow: hidden; }
   .paper::before { height: 12px; border-bottom-width: 3px; }
@@ -391,6 +392,7 @@ aside.notes { display: none; }
   .answer-strip .lbl { font-size: 12px; } .answer-strip .words { font-size: 21px; gap: 4px 14px; }
 
   .formula { margin-top: 24px; flex-direction: column; align-items: stretch; gap: 6px; }
+  .term { flex: none; }
   .term { min-height: 0; padding: 16px 18px; border-radius: 12px; }
   .term .big { font-size: 26px; } .term p { margin-top: 6px; font-size: 16px; }
   .op { font-size: 28px; text-align: center; line-height: 1; }
@@ -826,7 +828,7 @@ aside.notes { display: none; }
 
   function fit() {
     const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-    stage.style.transform = `scale(${scale})`;
+    stage.style.transform = `translate(-50%, -50%) scale(${scale})`;
   }
 
   function show(n, updateHash = true) {
@@ -893,6 +895,7 @@ aside.notes { display: none; }
   });
 
   window.addEventListener("resize", fit);
+  window.addEventListener("hashchange", () => { const h = /^#s(\d+)$/.exec(location.hash); if (h) show(Number(h[1]) - 1, false); });
   stacked.addEventListener?.("change", () => show(index, false));
   fit();
   const m = /^#s(\d+)$/.exec(location.hash);
