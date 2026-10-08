@@ -246,28 +246,7 @@ strong { font-weight: 900; }
   border-top: 3px dashed var(--ink-soft); padding-top: 20px; max-width: 58em;
 }
 
-/* ---------- 7 features ---------- */
-.features { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px 30px; }
-.feature { border: 4px solid var(--ink); border-radius: 14px; padding: 24px 28px; background: var(--line); }
-.feature .t { font-family: var(--font-display); font-size: 30px; line-height: 1.1; }
-.feature p { margin-top: 10px; font-size: 22px; line-height: 1.45; font-weight: 700; color: var(--ink-soft); }
-.feature .tag { display: inline-block; margin-bottom: 12px; font-weight: 900; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--track); }
-
-/* ---------- 8 content ---------- */
-.subjects { margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
-.subject { border-top: 4px solid currentColor; padding-top: 18px; }
-.subject:nth-child(1) { color: var(--chalk-yellow); }
-.subject:nth-child(2) { color: var(--chalk-green); }
-.subject:nth-child(3) { color: var(--chalk-blue); }
-.subject:nth-child(4) { color: var(--chalk-pink); }
-.subject .n { font-family: var(--font-display); font-size: 72px; line-height: 1; font-variant-numeric: tabular-nums; }
-.subject .name { margin-top: 6px; font-weight: 900; font-size: 28px; }
-.subject .ex { margin-top: 16px; color: var(--chalk); font-size: 22px; line-height: 1.45; font-weight: 700; }
-.subject .ex span { display: block; color: var(--chalk-dim); font-size: 18px; letter-spacing: .1em; text-transform: uppercase; font-weight: 900; margin-bottom: 4px; }
-.levels { margin-top: auto; display: flex; gap: 40px; align-items: center; font-size: 25px; font-weight: 700; color: var(--chalk-dim); flex-wrap: wrap; }
-.levels b { color: var(--chalk); }
-
-/* ---------- 9 implementation ---------- */
+/* ---------- 7 implementation ---------- */
 .impl { display: grid; grid-template-columns: 1fr 640px; gap: 56px; flex: 1; min-height: 0; }
 .facts { margin-top: 30px; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0 46px; }
 .fact .v { font-family: var(--font-display); font-size: 46px; line-height: 1.05; color: var(--line); }
@@ -289,7 +268,14 @@ strong { font-weight: 900; }
 .photos .p2 { right: 0; top: 70px; transform: rotate(3deg); }
 .photos .p2 img { width: 300px; height: 520px; object-position: 50% 60%; }
 
-/* ---------- 10 results ---------- */
+/* ---------- 8 video ---------- */
+.video-split { display: grid; grid-template-columns: 1fr 450px; gap: 80px; align-items: center; flex: 1; min-height: 0; }
+.video-hint { margin-top: 34px; font-size: 21px; line-height: 1.45; font-weight: 700; color: var(--chalk-dim); }
+.video-hint b { color: var(--chalk); }
+.video-frame { width: 450px; aspect-ratio: 9 / 16; max-height: 800px; border: 8px solid var(--chalk); border-radius: 26px; overflow: hidden; background: #000; box-shadow: 0 24px 50px rgba(0,0,0,.4); }
+.video-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+
+/* ---------- 9 results ---------- */
 .results { margin-top: 46px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px 56px; }
 .result-item { display: grid; grid-template-columns: 48px 1fr; gap: 18px; align-items: start; }
 .result-item svg { width: 48px; height: 48px; }
@@ -297,7 +283,7 @@ strong { font-weight: 900; }
 .result-item p { margin-top: 8px; font-size: 23px; line-height: 1.45; font-weight: 700; color: var(--ink-soft); }
 .note-honest { margin-top: auto; font-size: 23px; line-height: 1.45; font-weight: 700; color: var(--ink-soft); border-left: 6px solid var(--track); padding-left: 22px; max-width: 54em; }
 
-/* ---------- 11 reflection ---------- */
+/* ---------- 10 reflection ---------- */
 .ledger { margin-top: 40px; display: grid; grid-template-columns: 1fr 70px 1fr; row-gap: 0; }
 .ledger .h { font-weight: 900; font-size: 20px; letter-spacing: .14em; text-transform: uppercase; color: var(--track); padding-bottom: 12px; border-bottom: 4px solid var(--ink); }
 .ledger .c { font-size: 25px; line-height: 1.4; font-weight: 700; padding: 18px 0; border-bottom: 2px dashed rgba(29,42,36,.25); }
@@ -306,14 +292,14 @@ strong { font-weight: 900; }
 .ledger .arrow.h { border-bottom: 4px solid var(--ink); color: transparent; }
 .done { display: inline-block; background: var(--grass); color: var(--line); font-weight: 900; font-size: 16px; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 6px; margin-left: 8px; vertical-align: 3px; }
 
-/* ---------- 12 future ---------- */
+/* ---------- 11 future ---------- */
 .lanes { margin-top: 50px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; flex: 1; }
 .lane { padding: 0 30px 0 26px; border-left: 6px solid var(--line); }
 .lane .t { font-family: var(--font-display); font-size: 34px; line-height: 1.1; }
 .lane p { margin-top: 14px; font-size: 23px; line-height: 1.45; font-weight: 700; color: rgba(251,246,234,.9); }
 .track .foot { opacity: .75; }
 
-/* ---------- 13 demo ---------- */
+/* ---------- 12 demo ---------- */
 .demo { flex-direction: row; gap: 80px; align-items: center; }
 .demo .copy { flex: 1; min-width: 0; }
 .demo h2 { font-size: 96px; color: var(--chalk-yellow); }
@@ -428,15 +414,10 @@ aside.notes { display: none; }
   .role h3 { font-size: 21px; margin-bottom: 10px; } .role ul { font-size: 16px; gap: 6px; }
   .quote { margin-top: 22px; font-size: 14px; padding-top: 14px; }
 
-  .features { margin-top: 24px; grid-template-columns: 1fr; gap: 12px; }
-  .feature { padding: 14px 18px; border-width: 3px; }
-  .feature .tag { font-size: 11px; margin-bottom: 4px; } .feature .t { font-size: 20px; } .feature p { font-size: 15px; margin-top: 4px; }
-
-  .subjects { margin-top: 24px; grid-template-columns: 1fr 1fr; gap: 20px 16px; }
-  .subject { padding-top: 10px; border-top-width: 3px; }
-  .subject .n { font-size: 40px; } .subject .name { font-size: 16px; }
-  .subject .ex { margin-top: 8px; font-size: 14px; } .subject .ex span { font-size: 10px; }
-  .levels { margin-top: 24px; flex-direction: column; align-items: flex-start; gap: 4px; font-size: 15px; }
+  .video-split { grid-template-columns: 1fr; gap: 24px; }
+  .video .lede { margin-top: 12px; font-size: 17px; }
+  .video-hint { display: none; }
+  .video-frame { width: 100%; max-width: 300px; max-height: none; justify-self: center; border-width: 5px; border-radius: 16px; }
 
   .impl { grid-template-columns: 1fr; gap: 28px; }
   .facts { margin-top: 18px; gap: 0 26px; }
@@ -645,47 +626,7 @@ aside.notes { display: none; }
     </aside>
   </section>
 
-  <!-- 7. Features -->
-  <section class="slide paper" aria-label="Fitur">
-    <p class="eyebrow">Fitur</p>
-    <h2>Siap untuk kelas yang nyata</h2>
-    <div class="features">
-      <div class="feature"><span class="tag">Kalibrasi</span><div class="t">Menyesuaikan tiap siswa</div><p>Lima langkah singkat: berdiri, geser kiri, geser kanan, lompat, jongkok.</p></div>
-      <div class="feature"><span class="tag">Tingkat soal</span><div class="t">Naik bertahap</div><p>Mulai dari soal mudah, naik ke sedang dan sulit saat siswa banyak menjawab benar.</p></div>
-      <div class="feature"><span class="tag">Skor</span><div class="t">Poin, beruntun, bonus cepat</div><p>Ringkasan akhir menampilkan hasil per mata pelajaran.</p></div>
-      <div class="feature"><span class="tag">Soal</span><div class="t">Mudah diganti guru</div><p>Soal disimpan di file tersendiri. Ubah isinya, lalu muat ulang halaman.</p></div>
-      <div class="feature"><span class="tag">Tanpa kamera</span><div class="t">Tetap bisa dimainkan</div><p>Pakai keyboard atau tombol sentuh di tablet dan ponsel.</p></div>
-      <div class="feature"><span class="tag">Perangkat</span><div class="t">Cukup buka di browser</div><p>Laptop, tablet, atau IFP. Tanpa instalasi dan tanpa biaya.</p></div>
-    </div>
-    <div class="foot"><span>Motion Runner</span><span data-count></span></div>
-    <aside class="notes">
-      <p>Supaya bisa dipakai di kelas sungguhan, ada kalibrasi agar deteksi menyesuaikan tinggi badan dan jarak tiap siswa, tingkat soal yang naik bertahap, serta skor dengan ringkasan per mapel.</p>
-      <p>Guru bisa mengganti soal tanpa memprogram ulang. Kalau kamera bermasalah, game tetap bisa dimainkan dengan keyboard atau layar sentuh.</p>
-    </aside>
-  </section>
-
-  <!-- 8. Content -->
-  <section class="slide board" aria-label="Materi soal">
-    <p class="eyebrow">Materi</p>
-    <h2>65 soal kelas VII Kurikulum Merdeka</h2>
-    <div class="subjects">
-      <div class="subject"><div class="n">16</div><div class="name">IPS</div><p class="ex"><span>Contoh</span>Indonesia terbagi menjadi WIB, WITA, dan WIT karena pengaruh letak…</p></div>
-      <div class="subject"><div class="n">16</div><div class="name">IPA</div><p class="ex"><span>Contoh</span>Perubahan wujud dari padat langsung menjadi gas disebut…</p></div>
-      <div class="subject"><div class="n">17</div><div class="name">Matematika</div><p class="ex"><span>Contoh</span>Nilai x dari 3x − 4 = 11 adalah…</p></div>
-      <div class="subject"><div class="n">16</div><div class="name">Bahasa Indonesia</div><p class="ex"><span>Contoh</span>Teks yang berisi langkah-langkah melakukan sesuatu disebut teks…</p></div>
-    </div>
-    <div class="levels">
-      <span>Tiap mapel punya soal <b>mudah</b>, <b>sedang</b>, dan <b>sulit</b>,</span>
-      <span>serta soal <b>benar/salah</b> yang dijawab dengan lompat atau jongkok.</span>
-    </div>
-    <div class="foot"><span>Motion Runner</span><span data-count></span></div>
-    <aside class="notes">
-      <p>Soalnya mencakup empat mata pelajaran, total 65 soal kelas VII yang disesuaikan dengan Kurikulum Merdeka. Contohnya ada di layar.</p>
-      <p>Tiap mapel punya tiga tingkat kesulitan dan soal benar atau salah yang dijawab dengan lompat atau jongkok.</p>
-    </aside>
-  </section>
-
-  <!-- 9. Implementation -->
+  <!-- 7. Implementation -->
   <section class="slide track" aria-label="Implementasi">
     <div class="impl">
       <div>
@@ -714,7 +655,26 @@ aside.notes { display: none; }
     </aside>
   </section>
 
-  <!-- 10. Results -->
+  <!-- 8. Video -->
+  <section class="slide night video" aria-label="Video di kelas">
+    <div class="video-split">
+      <div>
+        <p class="eyebrow">Video</p>
+        <h2>Motion Runner di kelas VII D</h2>
+        <p class="lede">Rekaman langsung dari kelas: game dibuka di IFP, kamera menyala, lalu siswa kalibrasi dan bermain.</p>
+        <p class="video-hint">Klik video untuk memutar. Klik di luar video sebelum memakai tombol panah untuk pindah slide.</p>
+      </div>
+      <div class="video-frame">
+        <iframe src="https://drive.google.com/file/d/1NLqmV0JpIm63D55BtyPkHK_l4rfkwuun/preview" title="Video Motion Runner dimainkan di kelas VII D" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+    <div class="foot"><span>Motion Runner</span><span data-count></span></div>
+    <aside class="notes">
+      <p>Ini rekaman saat Motion Runner dipakai di kelas VII D. Terlihat game berjalan di IFP, kamera membaca tubuh siswa, dan siswa melakukan kalibrasi sebelum bermain.</p>
+    </aside>
+  </section>
+
+  <!-- 9. Results -->
   <section class="slide paper" aria-label="Hasil dan dampak">
     <p class="eyebrow">Hasil dan dampak</p>
     <h2>Yang terlihat di kelas</h2>
@@ -744,7 +704,7 @@ aside.notes { display: none; }
     </aside>
   </section>
 
-  <!-- 11. Reflection -->
+  <!-- 10. Reflection -->
   <section class="slide paper" aria-label="Refleksi">
     <p class="eyebrow">Refleksi</p>
     <h2>Dari kelas ke perbaikan</h2>
@@ -762,7 +722,7 @@ aside.notes { display: none; }
     </aside>
   </section>
 
-  <!-- 12. Sustainability -->
+  <!-- 11. Sustainability -->
   <section class="slide track" aria-label="Keberlanjutan">
     <p class="eyebrow">Keberlanjutan</p>
     <h2>Satu lintasan, banyak kelas</h2>
@@ -778,7 +738,7 @@ aside.notes { display: none; }
     </aside>
   </section>
 
-  <!-- 13. Demo -->
+  <!-- 12. Demo -->
   <section class="slide board demo" aria-label="Coba sekarang">
     <div class="copy">
       <p class="eyebrow">Coba sekarang</p>
