@@ -1,181 +1,286 @@
 [
   {
-    "id": "sci-mammal",
-    "text": "Hewan manakah yang termasuk mamalia?",
+    "id": "ipa-satuan-suhu",
+    "text": "Satuan suhu dalam Sistem Internasional (SI) adalah…",
     "type": "LANE",
     "difficulty": "EASY",
     "answers": [
       {
-        "text": "Ayam"
-      },
-      {
-        "text": "Kucing",
+        "text": "Kelvin",
         "correct": true
       },
       {
-        "text": "Ikan"
+        "text": "Celsius"
+      },
+      {
+        "text": "Fahrenheit"
       }
     ]
   },
   {
-    "id": "sci-roots",
-    "text": "Bagian tumbuhan mana yang menyerap air dari tanah?",
+    "id": "ipa-menguap",
+    "text": "Perubahan wujud dari cair menjadi gas disebut…",
     "type": "LANE",
     "difficulty": "EASY",
     "answers": [
       {
-        "text": "Akar",
+        "text": "Membeku"
+      },
+      {
+        "text": "Mengembun"
+      },
+      {
+        "text": "Menguap",
         "correct": true
-      },
-      {
-        "text": "Daun"
-      },
-      {
-        "text": "Batang"
       }
     ]
   },
   {
-    "id": "sci-home-planet",
-    "text": "Planet manakah yang kita tinggali?",
+    "id": "ipa-merkurius",
+    "text": "Planet yang paling dekat dengan Matahari adalah…",
     "type": "LANE",
     "difficulty": "EASY",
     "answers": [
       {
         "text": "Mars"
       },
-      {
-        "text": "Bumi",
-        "correct": true
-      },
-      {
-        "text": "Venus"
-      }
-    ]
-  },
-  {
-    "id": "sci-freezing",
-    "text": "Air membeku pada suhu berapa (pada tekanan normal)?",
-    "type": "LANE",
-    "difficulty": "MEDIUM",
-    "answers": [
-      {
-        "text": "100°C"
-      },
-      {
-        "text": "0°C",
-        "correct": true
-      },
-      {
-        "text": "50°C"
-      }
-    ]
-  },
-  {
-    "id": "sci-oxygen",
-    "text": "Gas apa yang dibutuhkan manusia untuk bernapas?",
-    "type": "LANE",
-    "difficulty": "MEDIUM",
-    "answers": [
-      {
-        "text": "Oksigen",
-        "correct": true
-      },
-      {
-        "text": "Nitrogen"
-      },
-      {
-        "text": "Karbon dioksida"
-      }
-    ]
-  },
-  {
-    "id": "sci-heart",
-    "text": "Organ manakah yang memompa darah ke seluruh tubuh?",
-    "type": "LANE",
-    "difficulty": "MEDIUM",
-    "answers": [
-      {
-        "text": "Paru-paru"
-      },
-      {
-        "text": "Jantung",
-        "correct": true
-      },
-      {
-        "text": "Hati"
-      }
-    ]
-  },
-  {
-    "id": "sci-mercury",
-    "text": "Planet manakah yang paling dekat dengan Matahari?",
-    "type": "LANE",
-    "difficulty": "MEDIUM",
-    "answers": [
       {
         "text": "Merkurius",
         "correct": true
       },
       {
         "text": "Venus"
-      },
-      {
-        "text": "Mars"
       }
     ]
   },
   {
-    "id": "sci-photosynthesis",
-    "text": "Proses tumbuhan membuat makanan dengan bantuan cahaya matahari disebut…",
+    "id": "ipa-termometer",
+    "text": "Alat untuk mengukur suhu adalah…",
     "type": "LANE",
-    "difficulty": "HARD",
+    "difficulty": "EASY",
     "answers": [
       {
-        "text": "Respirasi"
-      },
-      {
-        "text": "Fotosintesis",
+        "text": "Termometer",
         "correct": true
       },
       {
-        "text": "Transpirasi"
+        "text": "Barometer"
+      },
+      {
+        "text": "Neraca"
       }
     ]
   },
   {
-    "id": "sci-nucleus",
-    "text": "Bagian sel yang menyimpan materi genetik adalah…",
-    "type": "LANE",
-    "difficulty": "HARD",
+    "id": "ipa-insang",
+    "text": "Ikan bernapas dengan insang. Benar atau salah?",
+    "type": "MOVEMENT",
+    "difficulty": "EASY",
     "answers": [
       {
-        "text": "Mitokondria"
-      },
-      {
-        "text": "Inti sel",
+        "text": "Benar",
+        "action": "JUMP",
         "correct": true
       },
       {
-        "text": "Ribosom"
+        "text": "Salah",
+        "action": "CROUCH"
       }
     ]
   },
   {
-    "id": "sci-newton",
-    "text": "Satuan gaya dalam sistem SI adalah…",
+    "id": "ipa-kertas-dibakar",
+    "text": "Kertas dibakar hingga menjadi abu termasuk perubahan…",
     "type": "LANE",
-    "difficulty": "HARD",
+    "difficulty": "MEDIUM",
     "answers": [
       {
-        "text": "Joule"
+        "text": "Wujud"
+      },
+      {
+        "text": "Kimia",
+        "correct": true
+      },
+      {
+        "text": "Fisika"
+      }
+    ]
+  },
+  {
+    "id": "ipa-menyublim",
+    "text": "Perubahan wujud dari padat langsung menjadi gas disebut…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Menyublim",
+        "correct": true
+      },
+      {
+        "text": "Mencair"
+      },
+      {
+        "text": "Mengkristal"
+      }
+    ]
+  },
+  {
+    "id": "ipa-produsen",
+    "text": "Dalam rantai makanan, tumbuhan hijau berperan sebagai…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Konsumen"
+      },
+      {
+        "text": "Pengurai"
+      },
+      {
+        "text": "Produsen",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "ipa-newton",
+    "text": "Satuan gaya dalam Sistem Internasional (SI) adalah…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Watt"
       },
       {
         "text": "Newton",
         "correct": true
       },
       {
-        "text": "Watt"
+        "text": "Joule"
+      }
+    ]
+  },
+  {
+    "id": "ipa-vertebrata",
+    "text": "Hewan yang termasuk vertebrata (bertulang belakang) adalah…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Katak",
+        "correct": true
+      },
+      {
+        "text": "Cacing tanah"
+      },
+      {
+        "text": "Ubur-ubur"
+      }
+    ]
+  },
+  {
+    "id": "ipa-es-mencair",
+    "text": "Es mencair adalah contoh perubahan kimia. Benar atau salah?",
+    "type": "MOVEMENT",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Benar",
+        "action": "JUMP"
+      },
+      {
+        "text": "Salah",
+        "action": "CROUCH",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "ipa-kelvin",
+    "text": "Suhu 50 °C sama dengan … K.",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "373"
+      },
+      {
+        "text": "323",
+        "correct": true
+      },
+      {
+        "text": "223"
+      }
+    ]
+  },
+  {
+    "id": "ipa-kelajuan",
+    "text": "Sepeda menempuh 100 m dalam 20 sekon. Kelajuannya adalah…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "5 m/s",
+        "correct": true
+      },
+      {
+        "text": "20 m/s"
+      },
+      {
+        "text": "0,2 m/s"
+      }
+    ]
+  },
+  {
+    "id": "ipa-binomial",
+    "text": "Tata nama ilmiah dua kata (binomial nomenklatur) dicetuskan oleh…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Darwin"
+      },
+      {
+        "text": "Newton"
+      },
+      {
+        "text": "Linnaeus",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "ipa-rel",
+    "text": "Celah pada sambungan rel kereta api dibuat untuk mengantisipasi…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Korosi"
+      },
+      {
+        "text": "Pemuaian",
+        "correct": true
+      },
+      {
+        "text": "Gesekan"
+      }
+    ]
+  },
+  {
+    "id": "ipa-jamur",
+    "text": "Jamur dapat membuat makanan sendiri melalui fotosintesis. Benar atau salah?",
+    "type": "MOVEMENT",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Benar",
+        "action": "JUMP"
+      },
+      {
+        "text": "Salah",
+        "action": "CROUCH",
+        "correct": true
       }
     ]
   }

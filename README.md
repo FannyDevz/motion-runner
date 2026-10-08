@@ -107,6 +107,10 @@ Gambar dunia ada di `src/game/render/` (latar tribun, lintasan, rintangan, tokoh
 Soal disimpan sebagai file JSON di folder `public/questions/`, satu file per kategori, dan dibaca saat
 game dimuat. Jadi untuk menambah atau mengubah soal, cukup sunting file lalu refresh halaman. Tidak perlu build ulang.
 
+Soal bawaan berisi materi kelas VII Kurikulum Merdeka: `ips.json` (IPS), `science.json` (IPA), `math.json` (Matematika),
+dan `language.json` (Bahasa Indonesia). Tiap mapel punya soal mudah, sedang, dan sulit, serta beberapa soal benar/salah
+(lompat untuk benar, jongkok untuk salah).
+
 - `index.json` memuat daftar file yang dipakai: `{ "files": ["math.json", "science.json"] }`
 - Nama file menjadi nama kategori (`math.json` → kategori `math`), kecuali soalnya menulis `category` sendiri.
 - Untuk kategori baru: buat file baru, daftarkan di `index.json`, dan beri nama tampilannya di

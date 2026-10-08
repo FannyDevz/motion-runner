@@ -197,9 +197,8 @@ describe("sample question bank", async () => {
     expect(new Set(bank.categories)).toEqual(new Set(Object.keys(q.categoryLabels)));
   });
 
-  it("offers every difficulty in most categories, so progression has something to draw from", () => {
-    const full = bank.categories.filter((c) => new Set(byCategory(c).map((x) => x.difficulty)).size === 3);
-    expect(full.length).toBeGreaterThanOrEqual(5);
+  it("offers every difficulty in every category, so progression has something to draw from", () => {
+    for (const c of bank.categories) expect(new Set(byCategory(c).map((x) => x.difficulty)).size).toBe(3);
   });
 
   it("has plenty of questions at each difficulty", () => {

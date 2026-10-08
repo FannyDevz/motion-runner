@@ -1,127 +1,286 @@
 [
   {
-    "id": "lang-opposite-big",
-    "text": "Lawan kata dari 'besar' adalah…",
-    "type": "LANE",
-    "difficulty": "EASY",
-    "answers": [
-      {
-        "text": "Kecil",
-        "correct": true
-      },
-      {
-        "text": "Tinggi"
-      },
-      {
-        "text": "Panjang"
-      }
-    ]
-  },
-  {
-    "id": "lang-synonym-pretty",
-    "text": "Persamaan kata (sinonim) dari 'cantik' adalah…",
-    "type": "LANE",
-    "difficulty": "EASY",
-    "answers": [
-      {
-        "text": "Jelek"
-      },
-      {
-        "text": "Indah",
-        "correct": true
-      },
-      {
-        "text": "Kotor"
-      }
-    ]
-  },
-  {
-    "id": "lang-question-mark",
+    "id": "bind-tanda-tanya",
     "text": "Kalimat tanya diakhiri dengan tanda…",
     "type": "LANE",
     "difficulty": "EASY",
     "answers": [
       {
-        "text": "titik (.)"
+        "text": "Tanya (?)",
+        "correct": true
       },
       {
-        "text": "koma (,)"
+        "text": "Seru (!)"
       },
       {
-        "text": "tanda tanya (?)",
+        "text": "Titik (.)"
+      }
+    ]
+  },
+  {
+    "id": "bind-apotek",
+    "text": "Penulisan kata yang baku adalah…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Apotik"
+      },
+      {
+        "text": "Apoteik"
+      },
+      {
+        "text": "Apotek",
         "correct": true
       }
     ]
   },
   {
-    "id": "lang-standard-word",
-    "text": "Penulisan kata baku yang benar adalah…",
+    "id": "bind-sinonim",
+    "text": "Sinonim kata 'pandai' adalah…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Lambat"
+      },
+      {
+        "text": "Cerdas",
+        "correct": true
+      },
+      {
+        "text": "Malas"
+      }
+    ]
+  },
+  {
+    "id": "bind-nasihat",
+    "text": "Bentuk baku dari kata 'nasehat' adalah…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Nasihat",
+        "correct": true
+      },
+      {
+        "text": "Nasehat"
+      },
+      {
+        "text": "Nashehat"
+      }
+    ]
+  },
+  {
+    "id": "bind-risiko",
+    "text": "Kata 'resiko' adalah kata baku. Benar atau salah?",
+    "type": "MOVEMENT",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Benar",
+        "action": "JUMP"
+      },
+      {
+        "text": "Salah",
+        "action": "CROUCH",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "bind-deskripsi",
+    "text": "Teks yang menggambarkan objek secara rinci disebut teks…",
     "type": "LANE",
     "difficulty": "MEDIUM",
     "answers": [
       {
-        "text": "apotik"
+        "text": "Eksposisi"
       },
       {
-        "text": "apotek",
+        "text": "Deskripsi",
         "correct": true
       },
       {
-        "text": "appotek"
+        "text": "Prosedur"
       }
     ]
   },
   {
-    "id": "lang-root-word",
-    "text": "Kata dasar dari 'membaca' adalah…",
+    "id": "bind-prosedur",
+    "text": "Teks yang berisi langkah-langkah melakukan sesuatu disebut teks…",
     "type": "LANE",
     "difficulty": "MEDIUM",
     "answers": [
       {
-        "text": "baca",
+        "text": "Prosedur",
         "correct": true
       },
       {
-        "text": "membaca"
+        "text": "Deskripsi"
       },
       {
-        "text": "bacaan"
+        "text": "Narasi"
       }
     ]
   },
   {
-    "id": "lang-prefix",
-    "text": "Kata dasar 'sapu' dengan awalan me- menjadi…",
+    "id": "bind-di-pisah",
+    "text": "Penulisan yang benar adalah…",
     "type": "LANE",
-    "difficulty": "HARD",
+    "difficulty": "MEDIUM",
     "answers": [
       {
-        "text": "menyapu",
+        "text": "disekolah"
+      },
+      {
+        "text": "di-sekolah"
+      },
+      {
+        "text": "di sekolah",
         "correct": true
-      },
-      {
-        "text": "mensapu"
-      },
-      {
-        "text": "memsapu"
       }
     ]
   },
   {
-    "id": "lang-simile",
-    "text": "Majas yang membandingkan dua hal secara langsung dengan kata 'seperti' disebut…",
+    "id": "bind-rima",
+    "text": "Persamaan bunyi di akhir baris puisi disebut…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Larik"
+      },
+      {
+        "text": "Rima",
+        "correct": true
+      },
+      {
+        "text": "Bait"
+      }
+    ]
+  },
+  {
+    "id": "bind-orientasi",
+    "text": "Struktur cerita fantasi diawali dengan bagian…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Orientasi",
+        "correct": true
+      },
+      {
+        "text": "Komplikasi"
+      },
+      {
+        "text": "Resolusi"
+      }
+    ]
+  },
+  {
+    "id": "bind-antonim",
+    "text": "Antonim kata 'rajin' adalah 'malas'. Benar atau salah?",
+    "type": "MOVEMENT",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Benar",
+        "action": "JUMP",
+        "correct": true
+      },
+      {
+        "text": "Salah",
+        "action": "CROUCH"
+      }
+    ]
+  },
+  {
+    "id": "bind-imbuhan",
+    "text": "Kata 'membaca' terbentuk dari kata dasar 'baca' dan imbuhan…",
     "type": "LANE",
     "difficulty": "HARD",
     "answers": [
+      {
+        "text": "di-"
+      },
+      {
+        "text": "me-",
+        "correct": true
+      },
+      {
+        "text": "ber-"
+      }
+    ]
+  },
+  {
+    "id": "bind-observasi",
+    "text": "Teks laporan hasil observasi bersifat…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Faktual",
+        "correct": true
+      },
+      {
+        "text": "Imajinatif"
+      },
+      {
+        "text": "Persuasif"
+      }
+    ]
+  },
+  {
+    "id": "bind-personifikasi",
+    "text": "Majas yang memberi sifat manusia pada benda mati disebut…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Hiperbola"
+      },
       {
         "text": "Metafora"
       },
       {
-        "text": "Perumpamaan (simile)",
+        "text": "Personifikasi",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "bind-tanya",
+    "text": "Kata 'mengapa' dan 'bagaimana' termasuk kata…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Seru"
+      },
+      {
+        "text": "Tanya",
         "correct": true
       },
       {
-        "text": "Hiperbola"
+        "text": "Sambung"
+      }
+    ]
+  },
+  {
+    "id": "bind-perintah",
+    "text": "Teks prosedur banyak menggunakan kalimat perintah. Benar atau salah?",
+    "type": "MOVEMENT",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Benar",
+        "action": "JUMP",
+        "correct": true
+      },
+      {
+        "text": "Salah",
+        "action": "CROUCH"
       }
     ]
   }

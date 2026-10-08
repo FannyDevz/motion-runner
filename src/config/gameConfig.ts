@@ -447,12 +447,10 @@ export const gameConfig: GameConfig = {
       },
       categories: null,
       categoryLabels: {
-        math: "Matematika",
+        ips: "IPS",
         science: "IPA",
-        geography: "Geografi",
+        math: "Matematika",
         language: "Bahasa Indonesia",
-        logic: "Benar / Salah",
-        safety: "Keselamatan",
       },
       difficulty: {
         mode: "progressive",

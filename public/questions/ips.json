@@ -1,0 +1,287 @@
+[
+  {
+    "id": "ips-astronomis",
+    "text": "Letak astronomis Indonesia ditentukan oleh…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Lintang dan bujur",
+        "correct": true
+      },
+      {
+        "text": "Benua dan samudra"
+      },
+      {
+        "text": "Iklim dan cuaca"
+      }
+    ]
+  },
+  {
+    "id": "ips-dua-benua",
+    "text": "Secara geografis, Indonesia terletak di antara Benua Asia dan Benua…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Afrika"
+      },
+      {
+        "text": "Eropa"
+      },
+      {
+        "text": "Australia",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "ips-dua-samudra",
+    "text": "Indonesia diapit oleh Samudra Hindia dan Samudra…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Arktik"
+      },
+      {
+        "text": "Pasifik",
+        "correct": true
+      },
+      {
+        "text": "Atlantik"
+      }
+    ]
+  },
+  {
+    "id": "ips-produksi",
+    "text": "Kegiatan menghasilkan barang atau jasa disebut…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Produksi",
+        "correct": true
+      },
+      {
+        "text": "Distribusi"
+      },
+      {
+        "text": "Konsumsi"
+      }
+    ]
+  },
+  {
+    "id": "ips-primer",
+    "text": "Makanan, pakaian, dan tempat tinggal termasuk kebutuhan…",
+    "type": "LANE",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Sekunder"
+      },
+      {
+        "text": "Tersier"
+      },
+      {
+        "text": "Primer",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "ips-kepulauan",
+    "text": "Indonesia adalah negara kepulauan. Benar atau salah?",
+    "type": "MOVEMENT",
+    "difficulty": "EASY",
+    "answers": [
+      {
+        "text": "Benar",
+        "action": "JUMP",
+        "correct": true
+      },
+      {
+        "text": "Salah",
+        "action": "CROUCH"
+      }
+    ]
+  },
+  {
+    "id": "ips-skala",
+    "text": "Skala peta 1 : 100.000 berarti 1 cm di peta sama dengan … di lapangan.",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "1 km",
+        "correct": true
+      },
+      {
+        "text": "10 km"
+      },
+      {
+        "text": "100 m"
+      }
+    ]
+  },
+  {
+    "id": "ips-sosialisasi",
+    "text": "Proses seseorang mempelajari nilai dan norma masyarakat disebut…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Mobilitas"
+      },
+      {
+        "text": "Urbanisasi"
+      },
+      {
+        "text": "Sosialisasi",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "ips-agen-pertama",
+    "text": "Agen sosialisasi pertama yang dikenal seorang anak adalah…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Media massa"
+      },
+      {
+        "text": "Keluarga",
+        "correct": true
+      },
+      {
+        "text": "Sekolah"
+      }
+    ]
+  },
+  {
+    "id": "ips-tropis",
+    "text": "Indonesia beriklim tropis karena terletak di sekitar…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Khatulistiwa",
+        "correct": true
+      },
+      {
+        "text": "Kutub utara"
+      },
+      {
+        "text": "Garis bujur 0°"
+      }
+    ]
+  },
+  {
+    "id": "ips-distribusi",
+    "text": "Penyaluran barang dari produsen ke konsumen disebut…",
+    "type": "LANE",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Produksi"
+      },
+      {
+        "text": "Konsumsi"
+      },
+      {
+        "text": "Distribusi",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "ips-mobil-primer",
+    "text": "Mobil mewah termasuk kebutuhan primer. Benar atau salah?",
+    "type": "MOVEMENT",
+    "difficulty": "MEDIUM",
+    "answers": [
+      {
+        "text": "Benar",
+        "action": "JUMP"
+      },
+      {
+        "text": "Salah",
+        "action": "CROUCH",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "ips-asosiatif",
+    "text": "Interaksi sosial yang mengarah pada kerja sama dan persatuan disebut…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Asosiatif",
+        "correct": true
+      },
+      {
+        "text": "Disosiatif"
+      },
+      {
+        "text": "Kontravensi"
+      }
+    ]
+  },
+  {
+    "id": "ips-akulturasi",
+    "text": "Perpaduan dua budaya tanpa menghilangkan unsur budaya asli disebut…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Asimilasi"
+      },
+      {
+        "text": "Amalgamasi"
+      },
+      {
+        "text": "Akulturasi",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "id": "ips-zona-waktu",
+    "text": "Indonesia terbagi menjadi WIB, WITA, dan WIT karena pengaruh letak…",
+    "type": "LANE",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Geografis"
+      },
+      {
+        "text": "Astronomis",
+        "correct": true
+      },
+      {
+        "text": "Geologis"
+      }
+    ]
+  },
+  {
+    "id": "ips-kompetisi",
+    "text": "Persaingan (kompetisi) termasuk interaksi sosial asosiatif. Benar atau salah?",
+    "type": "MOVEMENT",
+    "difficulty": "HARD",
+    "answers": [
+      {
+        "text": "Benar",
+        "action": "JUMP"
+      },
+      {
+        "text": "Salah",
+        "action": "CROUCH",
+        "correct": true
+      }
+    ]
+  }
+]
