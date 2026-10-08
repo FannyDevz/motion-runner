@@ -103,6 +103,7 @@ body {
 .track .eyebrow { color: var(--whistle); }
 h1, h2 { font-family: var(--font-display); font-weight: 400; margin: 0; text-wrap: balance; line-height: 1.04; }
 h2 { font-size: 68px; letter-spacing: -.005em; }
+.h2-sm { font-size: 60px; }
 .lede { font-size: 31px; line-height: 1.4; font-weight: 700; max-width: 30em; margin: 22px 0 0; color: var(--ink-soft); }
 .board .lede, .night .lede { color: var(--chalk-dim); }
 p { margin: 0; }
@@ -355,6 +356,125 @@ strong { font-weight: 900; }
 .hint { position: fixed; left: 16px; bottom: calc(22px + env(safe-area-inset-bottom, 0px)); color: var(--chalk-dim); font-size: 13px; font-weight: 700; z-index: 5; opacity: .6; }
 @media (max-width: 700px) { .hint { display: none; } }
 aside.notes { display: none; }
+
+/* ---------- phones: stacked, scrolling slides instead of one scaled stage ---------- */
+@media (max-width: 820px), (max-height: 500px) {
+  html, body { height: auto; }
+  body { overflow: auto; }
+  .viewport { position: static; display: block; overflow: visible; padding: 16px 12px calc(24px + env(safe-area-inset-bottom, 0px)); }
+  .stage { width: auto; height: auto; transform: none !important; box-shadow: none; overflow: visible; border-radius: 0; display: grid; gap: 16px; }
+  .slide { position: relative; inset: auto; opacity: 1; visibility: visible; transform: none; transition: none; padding: 44px 20px 52px; border-radius: 12px; overflow: hidden; }
+  .paper::before { height: 12px; border-bottom-width: 3px; }
+  .board { border-width: 10px; box-shadow: inset 0 0 0 3px var(--board-edge); }
+  .foot { left: 20px; right: 20px; bottom: 16px; font-size: 11px; gap: 12px; }
+  .board .foot { left: 12px; right: 12px; bottom: 8px; }
+  .eyebrow { font-size: 13px; margin-bottom: 8px; }
+  h2, .h2-sm { font-size: 29px; }
+
+  .cover { flex-direction: column; padding: 0; }
+  .cover .left { padding: 40px 20px 20px; }
+  .bib { padding: 10px 22px 8px; }
+  .bib small { font-size: 11px; } .bib b { font-size: 26px; }
+  .bib::before, .bib::after { width: 8px; height: 8px; border-width: 2px; top: 6px; }
+  .cover h1 { margin-top: 26px; font-size: 62px; text-shadow: 0 4px 0 var(--track-dark); }
+  .cover .sub { margin-top: 16px; font-size: 19px; }
+  .cover .who { margin-top: 24px; font-size: 15px; } .cover .who b { font-size: 18px; }
+  .cover .right { width: auto; padding: 8px 20px 56px; }
+  .polaroid { padding: 10px 10px 40px; max-width: 280px; }
+  .polaroid img { width: 100%; height: 340px; }
+  .polaroid figcaption { font-size: 13px; bottom: 12px; }
+
+  .problems { margin-top: 24px; grid-template-columns: 1fr; gap: 18px; }
+  .problem { border-top-width: 4px; padding-top: 12px; }
+  .problem .k { font-size: 21px; } .problem p { margin-top: 6px; font-size: 16px; }
+  .answer-strip { margin-top: 24px; flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px 18px; }
+  .answer-strip .lbl { font-size: 12px; } .answer-strip .words { font-size: 21px; gap: 4px 14px; }
+
+  .formula { margin-top: 24px; flex-direction: column; align-items: stretch; gap: 6px; }
+  .term { min-height: 0; padding: 16px 18px; border-radius: 12px; }
+  .term .big { font-size: 26px; } .term p { margin-top: 6px; font-size: 16px; }
+  .op { font-size: 28px; text-align: center; line-height: 1; }
+  .result { margin-top: 20px; font-size: 18px; } .result b { font-size: 22px; }
+
+  .split { grid-template-columns: 1fr; gap: 24px; }
+  .steps { margin-top: 20px; gap: 12px; }
+  .steps li { grid-template-columns: 34px 1fr; gap: 12px; font-size: 16px; }
+  .steps li::before { width: 34px; height: 34px; font-size: 17px; }
+  .mapping { margin-top: 18px; gap: 8px; }
+  .chip { font-size: 14px; gap: 8px; padding: 4px 12px 4px 4px; border-width: 2px; }
+  .chip i { width: 28px; height: 28px; font-size: 14px; }
+  .phones { margin-top: 0; gap: 12px; }
+  .phone { flex: 1 1 0; min-width: 0; }
+  .phone:nth-child(2) { margin-top: 0; }
+  .phone img { width: 100%; height: auto; aspect-ratio: 3 / 5; border-width: 5px; border-radius: 16px; }
+  .phone figcaption { font-size: 13px; margin-top: 6px; }
+
+  .pipeline { margin-top: 24px; grid-template-columns: 1fr; gap: 16px; }
+  .node { padding: 0; display: grid; grid-template-columns: 42px 1fr; column-gap: 14px; }
+  .node:not(:last-child)::after { display: none; }
+  .node .dot { width: 42px; height: 42px; font-size: 18px; grid-row: span 2; }
+  .node .t { margin-top: 0; font-size: 20px; } .node p { margin-top: 2px; font-size: 15px; }
+  .ai-bottom { margin-top: 24px; grid-template-columns: 1fr; gap: 20px; }
+  .privacy { font-size: 16px; padding-left: 14px; border-left-width: 4px; }
+  .shot-wide img { width: 100%; height: 200px; border-width: 3px; }
+  .shot-wide figcaption { font-size: 13px; }
+
+  .roles { margin-top: 24px; grid-template-columns: 1fr; gap: 14px; }
+  .role { padding: 18px 20px; border-width: 3px; }
+  .role h3 { font-size: 21px; margin-bottom: 10px; } .role ul { font-size: 16px; gap: 6px; }
+  .quote { margin-top: 22px; font-size: 14px; padding-top: 14px; }
+
+  .features { margin-top: 24px; grid-template-columns: 1fr; gap: 12px; }
+  .feature { padding: 14px 18px; border-width: 3px; }
+  .feature .tag { font-size: 11px; margin-bottom: 4px; } .feature .t { font-size: 20px; } .feature p { font-size: 15px; margin-top: 4px; }
+
+  .subjects { margin-top: 24px; grid-template-columns: 1fr 1fr; gap: 20px 16px; }
+  .subject { padding-top: 10px; border-top-width: 3px; }
+  .subject .n { font-size: 40px; } .subject .name { font-size: 16px; }
+  .subject .ex { margin-top: 8px; font-size: 14px; } .subject .ex span { font-size: 10px; }
+  .levels { margin-top: 24px; flex-direction: column; align-items: flex-start; gap: 4px; font-size: 15px; }
+
+  .impl { grid-template-columns: 1fr; gap: 28px; }
+  .facts { margin-top: 18px; gap: 0 26px; }
+  .fact .v { font-size: 28px; } .fact .l { font-size: 11px; }
+  .timeline { margin-top: 22px; gap: 14px; }
+  .timeline li { grid-template-columns: 34px 1fr; gap: 12px; font-size: 15px; }
+  .timeline li::before { width: 34px; height: 34px; font-size: 16px; }
+  .timeline b { font-size: 17px; }
+  .photos { margin-top: 0; display: flex; gap: 14px; }
+  .photos figure { position: relative; flex: 1 1 0; min-width: 0; padding: 8px 8px 30px; }
+  .photos .p1, .photos .p2 { left: auto; right: auto; top: auto; }
+  .photos .p1 img, .photos .p2 img { width: 100%; height: 240px; }
+  .photos figcaption { font-size: 12px; bottom: 8px; }
+
+  .results { margin-top: 24px; grid-template-columns: 1fr; gap: 16px; }
+  .result-item { grid-template-columns: 36px 1fr; gap: 12px; }
+  .result-item svg { width: 36px; height: 36px; }
+  .result-item .t { font-size: 19px; } .result-item p { margin-top: 4px; font-size: 15px; }
+  .note-honest { margin-top: 24px; font-size: 14px; padding-left: 14px; border-left-width: 4px; }
+
+  .ledger { margin-top: 24px; grid-template-columns: 1fr 24px 1fr; }
+  .ledger .h { font-size: 11px; padding-bottom: 8px; border-bottom-width: 3px; }
+  .ledger .arrow.h { border-bottom-width: 3px; }
+  .ledger .c { font-size: 14px; padding: 10px 0; }
+  .ledger .arrow { font-size: 16px; }
+  .done { font-size: 10px; padding: 2px 6px; margin-left: 4px; vertical-align: 1px; }
+
+  .lanes { margin-top: 24px; grid-template-columns: 1fr; gap: 18px; }
+  .lane { padding: 0 0 0 16px; border-left-width: 4px; }
+  .lane .t { font-size: 20px; } .lane p { margin-top: 4px; font-size: 15px; }
+
+  .demo { flex-direction: column; align-items: stretch; gap: 26px; }
+  .demo h2 { font-size: 44px; }
+  .url { margin-top: 16px; font-size: 19px; border-bottom-width: 3px; }
+  .demo-steps { margin-top: 18px; font-size: 15px; gap: 8px; }
+  .thanks { margin-top: 22px; font-size: 28px; }
+  .qr { width: 100%; max-width: 260px; align-self: center; padding: 18px; }
+  .qr svg { width: 100%; height: auto; }
+  .qr p { font-size: 12px; margin-top: 10px; }
+
+  .controls, .hint, .progress, .notes-panel { display: none !important; }
+}
 </style>
 </head>
 <body>
@@ -441,7 +561,7 @@ aside.notes { display: none; }
     <div class="split">
       <div>
         <p class="eyebrow">Cara bermain</p>
-        <h2 style="font-size:60px">Jawabannya ada di tubuh siswa</h2>
+        <h2 class="h2-sm">Jawabannya ada di tubuh siswa</h2>
         <ol class="steps">
           <li><span>Karakter berlari. Siswa <b>bergeser, melompat, atau jongkok</b> untuk menghindari rintangan.</span></li>
           <li><span>Papan soal mendekat, <b>dunia melambat</b>, dan siswa diberi waktu membaca.</span></li>
@@ -700,6 +820,7 @@ aside.notes { display: none; }
   const notesBody = document.getElementById("notesBody");
   const notesBtn = document.getElementById("notesBtn");
   let index = 0;
+  const stacked = window.matchMedia("(max-width: 820px), (max-height: 500px)");
 
   slides.forEach((s, i) => s.querySelectorAll("[data-count]").forEach((el) => (el.textContent = `${i + 1} / ${total}`)));
 
@@ -713,7 +834,8 @@ aside.notes { display: none; }
     slides.forEach((s, i) => {
       s.classList.toggle("is-active", i === index);
       s.classList.toggle("is-past", i < index);
-      s.setAttribute("aria-hidden", i === index ? "false" : "true");
+      if (stacked.matches) s.removeAttribute("aria-hidden");
+      else s.setAttribute("aria-hidden", i === index ? "false" : "true");
     });
     counter.textContent = `${index + 1} / ${total}`;
     progress.style.width = `${((index + 1) / total) * 100}%`;
@@ -737,7 +859,7 @@ aside.notes { display: none; }
   }
 
   document.addEventListener("keydown", (e) => {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.metaKey || e.ctrlKey || e.altKey || stacked.matches) return;
     switch (e.key) {
       case "ArrowRight": case "ArrowDown": case "PageDown": case " ": case "Enter":
         e.preventDefault(); show(index + 1); break;
@@ -757,20 +879,21 @@ aside.notes { display: none; }
 
   // Click the slide: right two-thirds forward, left third back. Links keep working.
   document.getElementById("viewport").addEventListener("click", (e) => {
-    if (e.target.closest("a, button")) return;
+    if (stacked.matches || e.target.closest("a, button")) return;
     show(e.clientX > window.innerWidth / 3 ? index + 1 : index - 1);
   });
 
   let touchX = null;
   window.addEventListener("touchstart", (e) => { touchX = e.touches[0].clientX; }, { passive: true });
   window.addEventListener("touchend", (e) => {
-    if (touchX === null) return;
+    if (touchX === null || stacked.matches) return;
     const dx = e.changedTouches[0].clientX - touchX;
     if (Math.abs(dx) > 50) show(dx < 0 ? index + 1 : index - 1);
     touchX = null;
   });
 
   window.addEventListener("resize", fit);
+  stacked.addEventListener?.("change", () => show(index, false));
   fit();
   const m = /^#s(\d+)$/.exec(location.hash);
   show(m ? Number(m[1]) - 1 : 0, false);
